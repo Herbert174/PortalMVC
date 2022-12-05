@@ -1,22 +1,32 @@
+<?php
+    $erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Titulo -->
-        <title>Sidebar Dashboard</title>
+        <meta http-equiv="X-UA Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+        <title>Pagina de Login</title>
+        <link rel="icon" href="imagens/logo.png">
 
         <!-- Bootstrap -->
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <!-- CSS -->
-        <link rel="stylesheet" href="estilo.css">
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+        <!-- CSS -->
+        <link href="estilo.css" rel="stylesheet">
+
+        <!-- Javascript -->
+        <script type="text/javascript">
+
+        </script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" charset="utf-8"></script>
     </head>
 
-    
     <body>
         <input type="checkbox" id="check">
         <!-- Header area start -->
@@ -39,7 +49,7 @@
         <!-- Mobile navigation bar start -->
         <div class="mobile_nav">
             <div class="nav_bar">
-                <a href="#"><img src="imagens/perfil.jpg" class="mobile_profile_image" alt=""></a>
+                <a href="pagina_usuario.html"><img src="imagens/perfil.jpg" class="mobile_profile_image" alt=""></a>
                 <i class="fa fa-bars nav_btn"></i>
             </div>
             <div class="mobile_nav_items">
@@ -47,7 +57,7 @@
                 <a href="#"><i class="fas fa-cogs"></i><span>Components</span></a>
                 <a href="#"><i class="fas fa-table"></i><span>Tables</span></a>
                 <a href="#"><i class="fas fa-th"></i><span>Forms</span></a>
-                <a href="#"><i class="fas fa-info-circle"></i><span>About</span></a>
+                <a href="#"><i class="fas fa-info-circle"></i><span>Deslogar</span></a>
                 <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
             </div>
         </div>
@@ -56,50 +66,45 @@
         <!-- Sidebar start -->
         <div class="sidebar">
             <div class="profile_info">
-                <a class="link_foto" href="#"><img src="imagens/perfil.jpg" class="profile_image" alt=""></a>
+                <a class="link_foto" href="pagina_usuario.php"><img src="imagens/perfil.jpg" class="profile_image" alt=""></a>
                 <h4>Herbert</h4>
             </div>
             <a href="index.php"><i class="fas fa-desktop"></i><span>Home</span></a>
             <a href="#"><i class="fas fa-cogs"></i><span>Components</span></a>
             <a href="#"><i class="fas fa-table"></i><span>Tables</span></a>
             <a href="#"><i class="fas fa-th"></i><span>Forms</span></a>
-            <a href="#"><i class="fas fa-info-circle"></i><span>About</span></a>
+            <a href="#"><i class="fas fa-info-circle"></i><span>Deslogar</span></a>
             <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
         </div>
         <!-- Sidebar end -->
 
         <section class="content">
             <div class="Container">
-                <div class="col-sm-9">
-                    <div class="row custom1">
-                        <div class="col-sm-12">
-                            <input type="text" class="form-control form_custom" placeholder="Poste aqui">
-                            <button class="btn btn-outline-secondary button_custom" type="button">Enviar Post</button>
+                <div class="col-sm-8 custom2">
+                    <h2 class="centro">Já tenho uma conta</h2>
+                    <form method="post" action="validar_acesso.php" id="formLogin">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="campo_usuario" name="usuario" placeholder="Usuário" required="required"/>
                         </div>
-                    </div>
-                    <div class="row custom">
-                        <div class="col-sm-3">
-                            <img src="imagens/Postagem1.png" class="img_postagem">
+                        <div class="form-group">
+                            <input type="password" class="form-control red" id="campo_senha" name="senha" placeholder="Senha" required="required"/>
                         </div>
-                        <div class="col-sm-9">
-                            <div class="row">
-                                <span class="negrito">Criando o seu personagem</span>
-                            </div>
-                            <div class="row">
-                                <p>A construção de personagens é baseada nos jogos da série The Elder Scrolls, 
-                                    com bastante liberdade para o jogador criar o personagem da forma que preferir.
-                                    <a href="noticias1.php">leia mais...</a>
-                                </p>
-                            </div>
-                            <div class="row">
-                                Comentarios: Eso é um jogo fantastico
-                            </div>
-                        </div>
-                    </div>
+                    
+                        <button type="buttom" class="btn form-control btn-custom1 btn_cadastro" id="btn_login">Entrar</button>
+                        <br /><br />                
+                    </form>
+                    <?php
+                        if($erro == 1)
+                        {   
+                        echo '<font color="#FF0000">Usuario e ou senha invalido(s)</font>';
+                        }
+                    ?>
+                    <p class="direita">Não possui uma conta? <a href="cadastrar.php">Registre-se aqui</a></p>
                 </div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-2">
-                    <div class="row custom">
+                <div class="col-sm-1">
+                </div>
+                <div class="col-sm-3">
+                    <div class="row custom2">
                         <img class="img_noticia" src="imagens/logo.png">
                     </div>
                 </div>
@@ -118,6 +123,5 @@
                     })
                 });
         </script>
-
     </body>
 </html>
