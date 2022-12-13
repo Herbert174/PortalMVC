@@ -4,7 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Titulo -->
-        <title>Sidebar Dashboard</title>
+        <title>Inicio</title>
+        <link rel="icon" href="imagens/logo.png">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
@@ -71,104 +72,7 @@
         <section class="content">
             <div class="Container">
                 <div class="col-sm-9">
-                    <div class="row custom">
-                        <div class="col-sm-3">
-                            <img src="imagens/Postagem1.png" class="img_postagem">
-                        </div>
-                        <div class="col-sm-9">
-                            <div class="row">
-                                <span class="negrito">Criando o seu personagem</span>
-                            </div>
-                            <div class="row">
-                                <p>A construção de personagens é baseada nos jogos da série The Elder Scrolls, 
-                                    com bastante liberdade para o jogador criar o personagem da forma que preferir.
-                                    <a href="noticias1.php">leia mais...</a>
-                                </p>
-                            </div>
-                            <div class="row">
-                                Comentarios: Eso é um jogo fantastico
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row custom">
-                        <div class="col-sm-3">
-                            <img src="imagens/Postagem1.png" class="img_postagem">
-                        </div>
-                        <div class="col-sm-9">
-                            <div class="row">
-                                <span class="negrito">Criando o seu personagem</span>
-                            </div>
-                            <div class="row">
-                                <p>A construção de personagens é baseada nos jogos da série The Elder Scrolls, 
-                                    com bastante liberdade para o jogador criar o personagem da forma que preferir.
-                                    <a href="noticias1.php">leia mais...</a>
-                                </p>
-                            </div>
-                            <div class="row">
-                                Comentarios: Eso é um jogo fantastico
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row custom">
-                        <div class="col-sm-3">
-                            <img src="imagens/Postagem1.png" class="img_postagem">
-                        </div>
-                        <div class="col-sm-9">
-                            <div class="row">
-                                <span class="negrito">Criando o seu personagem</span>
-                            </div>
-                            <div class="row">
-                                <p>A construção de personagens é baseada nos jogos da série The Elder Scrolls, 
-                                    com bastante liberdade para o jogador criar o personagem da forma que preferir.
-                                    <a href="noticias1.php">leia mais...</a>
-                                </p>
-                            </div>
-                            <div class="row">
-                                Comentarios: Eso é um jogo fantastico
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row custom">
-                        <div class="col-sm-3">
-                            <img src="imagens/Postagem1.png" class="img_postagem">
-                        </div>
-                        <div class="col-sm-9">
-                            <div class="row">
-                                <span class="negrito">Criando o seu personagem</span>
-                            </div>
-                            <div class="row">
-                                <p>A construção de personagens é baseada nos jogos da série The Elder Scrolls, 
-                                    com bastante liberdade para o jogador criar o personagem da forma que preferir.
-                                    <a href="noticias1.php">leia mais...</a>
-                                </p>
-                            </div>
-                            <div class="row">
-                                Comentarios: Eso é um jogo fantastico
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row custom">
-                        <div class="col-sm-3">
-                            <img src="imagens/Postagem1.png" class="img_postagem">
-                        </div>
-                        <div class="col-sm-9">
-                            <div class="row">
-                                <span class="negrito">Criando o seu personagem</span>
-                            </div>
-                            <div class="row">
-                                <p>A construção de personagens é baseada nos jogos da série The Elder Scrolls, 
-                                    com bastante liberdade para o jogador criar o personagem da forma que preferir.
-                                    <a href="noticias1.php">leia mais...</a>
-                                </p>
-                            </div>
-                            <div class="row">
-                                Comentarios: Eso é um jogo fantastico
-                            </div>
-                        </div>
+                    <div id="portal">
                     </div>
                 </div>
                 <div class="col-sm-1"></div>
@@ -189,7 +93,19 @@
             $(document).ready(function(){
                 $('.nav_btn').click(function(){
                     $('.mobile_nav_items').toggleClass('active');
-                    })
+                    });
+                function postarpost()
+                    {
+                    //carrega os posts
+                    $.ajax({
+                          url: 'postar_post.php',
+                          success: function(data)
+                              {
+                              $('#portal').html(data);
+                              }
+                          })
+                    }
+                postarpost();
                 });
         </script>
 

@@ -249,8 +249,8 @@ label #sidebar_btn:hover{
 	}
 
 /* ------------------- Layout ----------------------- */
-
-
+.div_esquerda{float: left;}
+.div_direita{float: right;}
 /* -------------- Barra de Navegação ---------------- */
 /*.logo {height: 40px; width: 50px; margin-top: 5px;}*/
 .link_foto
@@ -279,7 +279,7 @@ label #sidebar_btn:hover{
 .custom{background: white; color: black; opacity: 0.8; margin-bottom: 10px;}
 .custom1{background: white; color: black; opacity: 0.8; margin-bottom: 10px; border-radius: 10px;}
 .custom2{background: white; color: black; margin-bottom: 10px; border-radius: 10px;}
-.img_postagem{height: 100%; width: 100%; position: center;}
+.img_postagem{height: 100px; width: 100%; position: center;}
 .img_postagem1{display: block; margin-left: auto; margin-right: auto;}
 .img_noticia{height: 150px; width: 100%;}
 .borda{border-style: solid;}

@@ -101,9 +101,9 @@
                     ?>
                     <p class="direita">Não possui uma conta? <a href="cadastrar.php">Registre-se aqui</a></p>
                 </div>
-                <div class="col-sm-1">
+                <div class="col-sm-2">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="row custom2">
                         <img class="img_noticia" src="imagens/logo.png">
                     </div>

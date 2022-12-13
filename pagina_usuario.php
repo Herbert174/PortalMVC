@@ -4,16 +4,33 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Titulo -->
-        <title>Sidebar Dashboard</title>
+        <title>Pagina do Usuário</title>
+        <link rel="icon" href="imagens/logo.png">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
         <!-- Bootstrap -->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
         <!-- CSS -->
         <link rel="stylesheet" href="estilo.css">
-
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" charset="utf-8"></script>
+
+        <!-- Jquery -->
+        <script src="jquery-3.6.0.js"></script>
+
+        <!-- Javascript -->
+        <script type="text/javascript">
+            $(document).ready(function()
+                {
+                $('#post').click( function()
+                    {
+                    $.ajax({
+                          $('#modal-post').modal();
+                          });
+                    })
+                });
+        </script>
     </head>
 
     
@@ -68,54 +85,160 @@
         </div>
         <!-- Sidebar end -->
 
+        <div class="modal fade" id="modal-post">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                    <h4 class="modal-title">Post</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form method="post" action="enviar_post.php" id="formPost" enctype="multipart/form-data">
+                                <div class="container">
+                                    <a class="btn btn-primary" href="javascript:void(0)" id="addInput">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        Adicionar Campo
+                                    </a>
+                                    <select class="form-select" id="tipoInput">
+                                        <option value="1">Titulo</option>
+                                        <option value="2">Conteúdo</option>
+                                        <option value="3">Imagem</option>
+                                    </select>
+                                    <br/><br>
+                                    <div id="dynamicDiv">
+                                        <p>
+                                            <input type="text" id="post[1]" name="post[1]" size="20" value="" placeholder="Adicione um titulo" maxlength="50" required/><br><br>
+                                        </p>
+                                        <p>
+                                        <textarea id="post[2]" name="post[2]" rows="3" cols="18" placeholder="Adicione um resumo" minlength="50" required></textarea><br><br>
+                                        </p>
+                                    </div>
+                                    <input type="submit" class="btn btn-primary" value="Enviar">
+
+                                    <script>
+                                    $(function () {
+                                        var scntDiv = $('#dynamicDiv');
+                                        var qnt_input = 2;
+                                        var file_unico = 0;
+                                        $(document).on('click', '#addInput', function ()
+                                            {
+                                            if($('#tipoInput :selected').val() == 1)
+                                                {
+                                                qnt_input++;
+                                                $('<p>'+
+                                                    `<input type="text" id="post[${qnt_input}]" name="post[${qnt_input}]" size="20" value="" placeholder="Adicione um titulo" maxlength="50" required/><br><br>`+
+                                                    '<a class="btn btn-danger" href="javascript:void(0)" id="remInput">'+
+                                                        '<span class="glyphicon glyphicon-minus" aria-hidden="true"></span> '+
+                                                        'Remover Campo'+
+                                                    '</a><br><br>'+
+                                                '</p>').appendTo(scntDiv);
+                                                return false;
+                                                }
+                                            if($('#tipoInput :selected').val() == 2)
+                                                {
+                                                qnt_input++;
+                                                $('<p>'+
+                                                    `<textarea id="post[${qnt_input}]" name="post[${qnt_input}]" rows="3" cols="18" placeholder="Conteúdo do Post" minlength="50" required></textarea><br><br>`+
+                                                    '<a class="btn btn-danger" href="javascript:void(0)" id="remInput">'+
+                                                        '<span class="glyphicon glyphicon-minus" aria-hidden="true"></span> '+
+                                                        'Remover Campo'+
+                                                    '</a><br><br>'+
+                                                '</p>').appendTo(scntDiv);
+                                                return false;
+                                                }
+                                            if($('#tipoInput :selected').val() == 3 && file_unico == 0)
+                                                {
+                                                file_unico = 1;
+                                                $('<p>'+
+                                                    `<input type="hidden" name="MAX_FILE_SIZE" value="99999999"/><input id="imagem" name="imagem[]" type="file" multiple="multiple" required/><br>`+
+                                                    '<a class="btn btn-danger" href="javascript:void(0)" id="remInput1">'+
+                                                        '<span class="glyphicon glyphicon-minus" aria-hidden="true"></span> '+
+                                                        'Remover Campo'+
+                                                    '</a><br><br>'+
+                                                '</p>').appendTo(scntDiv);
+                                                return false;
+                                                }else{alert('Apenas um campo de envio de imagens é permitida');}
+                                            });
+
+                                        $(document).on('click', '#remInput', function () 
+                                            {
+                                            $(this).parents('p').remove();
+                                            return false;
+                                            });
+                                        $(document).on('click', '#remInput1', function () 
+                                            {
+                                            file_unico = 0;
+                                            $(this).parents('p').remove();
+                                            return false;
+                                            });
+                                    });
+                                    </script>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                  </div>                                             
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+        </div>
+
         <section class="content">
             <div class="Container">
                 <div class="col-sm-9">
                     <div class="row custom1">
                         <div class="col-sm-12">
-                            <input type="text" class="form-control form_custom" placeholder="Poste aqui">
+                            <input type="text" class="form-control form_custom" placeholder="Poste aqui" id="post" data-toggle="modal" data-target="#modal-post">
                             <button class="btn btn-outline-secondary button_custom" type="button">Enviar Post</button>
                         </div>
                     </div>
-                    <div class="row custom">
-                        <div class="col-sm-3">
-                            <img src="imagens/Postagem1.png" class="img_postagem">
-                        </div>
-                        <div class="col-sm-9">
-                            <div class="row">
-                                <span class="negrito">Criando o seu personagem</span>
-                            </div>
-                            <div class="row">
-                                <p>A construção de personagens é baseada nos jogos da série The Elder Scrolls, 
-                                    com bastante liberdade para o jogador criar o personagem da forma que preferir.
-                                    <a href="noticias1.php">leia mais...</a>
-                                </p>
-                            </div>
-                            <div class="row">
-                                Comentarios: Eso é um jogo fantastico
-                            </div>
-                        </div>
+                    <div id="portal">
                     </div>
                 </div>
+
                 <div class="col-sm-1"></div>
+
                 <div class="col-sm-2">
                     <div class="row custom">
                         <img class="img_noticia" src="imagens/logo.png">
                     </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) 
-        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>-->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="bootstrap/js/bootstrap.min.js"></script>
 
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
         <script type="text/javascript">
-            $(document).ready(function(){
+            $(document).ready(function()
+                {
                 $('.nav_btn').click(function(){
                     $('.mobile_nav_items').toggleClass('active');
-                    })
+                    });
+                function postarpost()
+                    {
+                    //carrega os posts
+                    $.ajax({
+                          url: 'postar_post.php',
+                          success: function(data)
+                              {
+                              $('#portal').html(data);
+                              }
+                          })
+                    }
+                postarpost();
                 });
         </script>
 

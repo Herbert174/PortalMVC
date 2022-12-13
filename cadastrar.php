@@ -10,7 +10,7 @@
         <meta http-equiv="X-UA Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Pagina de Login</title>
+        <title>Pagina de Cadastro</title>
         <link rel="icon" href="imagens/logo.png">
 
         <!-- Bootstrap -->
@@ -112,9 +112,9 @@
                         <br><br>
                     </form>
                 </div>
-                <div class="col-sm-1">
+                <div class="col-sm-2">
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="row custom2">
                         <img class="img_noticia" src="imagens/logo.png">
                     </div>
