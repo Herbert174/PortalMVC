@@ -46,7 +46,7 @@
             $path = $pasta.$novoNomeImagem.".".$extensao;
                 
             $deu_certo = move_uploaded_file($imagem['tmp_name'][$img], $path);//Move o arquivo selecionado para a pasta de imagens/arquivo do servidor
-            $postando.='<img class="img-responsive" height = 200px; width = 250px; src='.$path.'><br><br>';
+            $postando.='<img class="img-responsive img_postagem2" src='.$path.'><br><br>';
             if($img==0)
                 {
                 $img_post = $path;

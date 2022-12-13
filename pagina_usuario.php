@@ -98,15 +98,16 @@
                         <div class="col-md-6">
                             <form method="post" action="enviar_post.php" id="formPost" enctype="multipart/form-data">
                                 <div class="container">
-                                    <a class="btn btn-primary" href="javascript:void(0)" id="addInput">
-                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                        Adicionar Campo
-                                    </a>
-                                    <select class="form-select" id="tipoInput">
+                                    <select class="form-control select_custom" id="tipoInput">
                                         <option value="1">Titulo</option>
                                         <option value="2">Conteúdo</option>
                                         <option value="3">Imagem</option>
                                     </select>
+                                    <br/>
+                                    <a class="btn btn-primary select_custom" href="javascript:void(0)" id="addInput">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        Adicionar Campo
+                                    </a>
                                     <br/><br>
                                     <div id="dynamicDiv">
                                         <p>

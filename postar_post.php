@@ -23,7 +23,7 @@
         echo '<span class="negrito">'.$posts['titulo_post'].'</span>';
         echo '</div>';
         echo '<div class="row">';
-        echo '<p>'.$posts['resumo_post'].'<a href="#">leia mais...</a></p>';
+        echo '<p>'.$posts['resumo_post'].'<a href="consulta_post.php?post='.$posts['id_post'].'">leia mais...</a></p>';
         echo '</div>';
         echo '<div class="row">';
         echo 'Comentarios: Que post excelente';

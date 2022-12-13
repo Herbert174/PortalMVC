@@ -281,11 +281,13 @@ label #sidebar_btn:hover{
 .custom2{background: white; color: black; margin-bottom: 10px; border-radius: 10px;}
 .img_postagem{height: 100px; width: 100%; position: center;}
 .img_postagem1{display: block; margin-left: auto; margin-right: auto;}
+.img_postagem2{height: 200px; width: 250px;}
 .img_noticia{height: 150px; width: 100%;}
 .borda{border-style: solid;}
 .texto-capa{text-align: center; vertical-align: center;}
 .form_custom{margin-top: 5px;}
 .button_custom{margin-left: 87%; margin-top: 3px; margin-bottom: 5px;}
+.select_custom{width: 182px;}
 /* ----------------- Seção rodapé ------------------- */
 
 
