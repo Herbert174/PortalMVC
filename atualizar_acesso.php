@@ -4,11 +4,10 @@
 
 	require_once('db.class.php');//Habilita funções do db.class.php
 
-	$usuario = $_POST['usuario'];
-	$senha = md5($_POST['senha']);
+	$id_usuario = $_SESSION['id_usuario'];
 
 	//Codigo enviado para o banco de dados, responsavel por comparar se os usuario e senha enviados pelo usuario são cadastrado no sistema
-	$sql = " SELECT * FROM usuarios WHERE nome = '$usuario' AND senha = '$senha' ";
+	$sql = " SELECT * FROM usuarios WHERE id_usuario = '$id_usuario' ";
 
 	$objDb = new database();//Instância a classe
 	$link = $objDb -> conecta_mysql();//Executa função de conexão com o MySQL

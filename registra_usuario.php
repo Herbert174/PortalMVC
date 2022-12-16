@@ -62,7 +62,7 @@
 	if(mysqli_query($link, $sql))
 		{
 		$retorno_get.= "sucesso_registro=1&";
-		header('Location: index.php?'.$retorno_get);
+		header('Location: login.php?'.$retorno_get);
 		}else{
 			 echo 'Erro ao registrar usúario';
 			 }

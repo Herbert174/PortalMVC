@@ -1,5 +1,6 @@
 <?php
     $erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
+    $sucesso = isset($_GET['sucesso_registro']) ? $_GET['sucesso_registro'] : 0;
 ?>
 
 <!DOCTYPE html>
@@ -95,9 +96,13 @@
                     </form>
                     <?php
                         if($erro == 1)
-                        {   
-                        echo '<font color="#FF0000">Usuario e ou senha invalido(s)</font>';
-                        }
+                            {   
+                            echo '<font color="#FF0000">Usuario e ou senha invalido(s)</font>';
+                            }
+                        if($sucesso == 1)
+                            {
+                            echo '<font color="#0E7411">Conta criada com sucesso! realize o login para continuar</font>';
+                            }
                     ?>
                     <p class="direita">Não possui uma conta? <a href="cadastrar.php">Registre-se aqui</a></p>
                 </div>
