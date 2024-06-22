@@ -9,6 +9,15 @@
 	$titulo_post = $_SESSION['titulo_post'];
 	$resumo_post = $_SESSION['resumo_post'];
 
+    require_once('usuario_classe.php');
+
+    $user = new usuario();
+    $name_usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
+    $img_usuario  = isset($_SESSION['img_perfil']) ? $_SESSION['img_perfil'] : NULL;
+    $user -> verifica_login($name_usuario, $img_usuario);
+    $usuario = $user -> recebe_nome_usuario();
+    $img_perfil = $user -> recebe_foto_usuario();
+
 ?>
 
 <!DOCTYPE html>
@@ -24,10 +33,26 @@
 
         <!-- Bootstrap -->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
         <!-- CSS -->
         <link rel="stylesheet" href="estilo.css">
-
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" charset="utf-8"></script>
+        
+        <!-- Jquery -->
+        <script src="jquery-3.6.0.js"></script>
+
+        <!-- Javascript -->
+        <script type="text/javascript">
+            $(document).ready(function()
+                {
+                $('#perfil').click( function()
+                    {
+                    $.ajax({
+                          $('#modal-perfil').modal();
+                          });
+                    })
+                });
+        </script>
     </head>
 
     
@@ -58,8 +83,8 @@
             </div>
             <div class="mobile_nav_items">
                 <a href="index.php"><i class="fas fa-desktop"></i><span>Home</span></a>
-                <a href="#"><i class="fas fa-cogs"></i><span>Components</span></a>
-                <a href="#"><i class="fas fa-table"></i><span>Tables</span></a>
+                <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Components</span></a>
+                <a href="categorias.php"><i class="fas fa-table"></i><span>Tables</span></a>
                 <a href="#"><i class="fas fa-th"></i><span>Forms</span></a>
                 <a href="#"><i class="fas fa-info-circle"></i><span>About</span></a>
                 <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
@@ -70,17 +95,51 @@
         <!-- Sidebar start -->
         <div class="sidebar">
             <div class="profile_info">
-                <a class="link_foto" href="pagina_usuario.php"><img src="imagens/perfil.jpg" class="profile_image" alt=""></a>
-                <h4>Herbert</h4>
+                <a class="link_foto" href="pagina_usuario.php"><img src="<?= $img_perfil ?>" class="profile_image" alt=""></a>
+                <h4><?= $usuario ?></h4>
             </div>
             <a href="index.php"><i class="fas fa-desktop"></i><span>Home</span></a>
-            <a href="#"><i class="fas fa-cogs"></i><span>Components</span></a>
-            <a href="#"><i class="fas fa-table"></i><span>Tables</span></a>
+            <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Components</span></a>
+            <a href="categorias.php"><i class="fas fa-table"></i><span>Tables</span></a>
             <a href="#"><i class="fas fa-th"></i><span>Forms</span></a>
             <a href="#"><i class="fas fa-info-circle"></i><span>About</span></a>
             <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
         </div>
         <!-- Sidebar end -->
+
+        <div class="modal fade" id="modal-perfil">
+        <div class="modal-dialog">
+            <div class="modal-content modal_custom">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                    <h4 class="modal-title">Perfil</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="container">
+                    <div class="row">
+                        <div class="col-md-1">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="profile_info">
+                                <img src="<?= $img_perfil ?>" class="link_foto margin_custom" alt="">
+                                <h2><?= $usuario ?></h2>
+                                <form method="post" action="atualizar_perfil.php" id="formPost" enctype="multipart/form-data">
+                                    <input type="text" class="input_custom" value="" id="nome" name="nome" placeholder="Insira um nome de usúario" maxlength="50"/><br><br>
+                                    <p>Escolha uma imagem para substituir a do seu perfil</p>
+                                    <input type="hidden" name="MAX_FILE_SIZE" value="99999999"/><input class="form-control input_custom" id="imagem" name="imagem" type="file"/><br>
+                                    <input type="submit" class="btn btn_envio input_custom" value="Enviar">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                  </div>                                             
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+        </div>
 
         <section class="content">
             <div class="Container">
@@ -113,10 +172,13 @@
             </div>
         </section>
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) 
-        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>-->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins)-->
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="bootstrap/js/bootstrap.min.js"></script>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
         <script type="text/javascript">
             $(document).ready(function(){

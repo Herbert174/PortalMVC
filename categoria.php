@@ -2,13 +2,12 @@
 
     session_start();
 
-    
-    /*function _autoload($class_name)
+    $categoria = $_GET['categoria'];
+
+    function __autoload($class_name)
         {
         include $class_name."_classe.php";
-        }*/
-    include "usuario_classe.php";
-    include "post_classe.php";
+        }
 
     $user = new usuario();
     $name_usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
@@ -81,7 +80,7 @@
                 <i class="fa fa-bars nav_btn"></i>
             </div>
             <div class="mobile_nav_items">
-                <a href="#"><i class="fas fa-desktop"></i><span>Home</span></a>
+                <a href="index.php"><i class="fas fa-desktop"></i><span>Home</span></a>
                 <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Components</span></a>
                 <a href="categorias.php"><i class="fas fa-table"></i><span>Tables</span></a>
                 <a href="#"><i class="fas fa-th"></i><span>Forms</span></a>
@@ -97,7 +96,7 @@
                 <a class="link_foto" href="pagina_usuario.php"><img src="<?= $img_perfil ?>" class="profile_image" alt=""></a>
                 <h4><?= $usuario ?></h4>
             </div>
-            <a href="#"><i class="fas fa-desktop"></i><span>Home</span></a>
+            <a href="index.php"><i class="fas fa-desktop"></i><span>Home</span></a>
             <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Components</span></a>
             <a href="categorias.php"><i class="fas fa-table"></i><span>Tables</span></a>
             <a href="#"><i class="fas fa-th"></i><span>Forms</span></a>
@@ -144,7 +143,7 @@
             <div class="Container">
                 <div class="col-sm-9">
                     <div id="portal">
-                        <?php echo $Post->postar_post(); ?>
+                        <?php echo $Post->post_categoria($categoria); ?>
                     </div>
                 </div>
                 <div class="col-sm-1"></div>
@@ -169,19 +168,6 @@
                 $('.nav_btn').click(function(){
                     $('.mobile_nav_items').toggleClass('active');
                     });
-                
-                /*function postarpost()
-                    {
-                    //carrega os posts
-                    $.ajax({
-                          url: 'postar_post.php',
-                          success: function(data)
-                              {
-                              $('#portal').html(data);
-                              }
-                          });
-                    }
-                postarpost();*/
                 });
         </script>
 

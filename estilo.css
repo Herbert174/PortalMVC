@@ -283,6 +283,7 @@ label #sidebar_btn:hover{
 	font-weight: 600;
 	color: white;
 	}
+.btn_envio{background: #ED3907; color: white;}
 
 /* ---------------- Seção conteudo ------------------ */
 .custom{background: white; color: black; opacity: 0.8; margin-bottom: 10px;}
@@ -296,9 +297,11 @@ label #sidebar_btn:hover{
 .texto-capa{text-align: center; vertical-align: center;}
 .form_custom{margin-top: 5px;}
 .button_custom{margin-left: 87%; margin-top: 3px; margin-bottom: 5px;}
-.select_custom{width: 182px;}
+.select_custom{width: 400px;}
+.input_custom{width: 100%;}
 .modal_custom{background: #2f323a; color: white;}
 .modal_custom form{color: black;}
+.modal_custom p{color: white;}
 /* ----------------- Seção rodapé ------------------- */
 
 

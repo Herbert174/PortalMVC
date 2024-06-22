@@ -1,4 +1,16 @@
 <?php
+
+    session_start();
+
+    require_once('usuario_classe.php');
+
+    $user = new usuario();
+    $name_usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
+    $img_usuario  = isset($_SESSION['img_perfil']) ? $_SESSION['img_perfil'] : NULL;
+    $user -> verifica_login($name_usuario, $img_usuario);
+    $usuario = $user -> recebe_nome_usuario();
+    $img_perfil = $user -> recebe_foto_usuario();
+
     $erro_usuario = isset($_GET['erro_usuario']) ? $_GET['erro_usuario'] : 0;
     $erro_email = isset($_GET['erro_email']) ? $_GET['erro_email'] : 0;
 ?>
@@ -67,8 +79,8 @@
         <!-- Sidebar start -->
         <div class="sidebar">
             <div class="profile_info">
-                <a class="link_foto" href="pagina_usuario.php"><img src="imagens/perfil.jpg" class="profile_image" alt=""></a>
-                <h4>Herbert</h4>
+                <a class="link_foto" href="pagina_usuario.php"><img src="<?= $img_perfil ?>" class="profile_image" alt=""></a>
+                <h4><?= $usuario ?></h4>
             </div>
             <a href="index.php"><i class="fas fa-desktop"></i><span>Home</span></a>
             <a href="#"><i class="fas fa-cogs"></i><span>Components</span></a>

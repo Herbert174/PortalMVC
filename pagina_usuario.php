@@ -1,3 +1,19 @@
+<?php
+
+    session_start();
+
+    require_once('usuario_classe.php');
+    require_once('post_classe.php');
+
+    $user = new usuario();
+    $name_usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
+    $img_usuario  = isset($_SESSION['img_perfil']) ? $_SESSION['img_perfil'] : NULL;
+    $user -> verifica_login($name_usuario, $img_usuario);
+    $usuario = $user -> recebe_nome_usuario();
+    $img_perfil = $user -> recebe_foto_usuario();
+    $Post = new Post();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -27,6 +43,13 @@
                     {
                     $.ajax({
                           $('#modal-post').modal();
+                          });
+                    })
+
+                $('#perfil').click( function()
+                    {
+                    $.ajax({
+                          $('#modal-perfil').modal();
                           });
                     })
                 });
@@ -61,7 +84,7 @@
             </div>
             <div class="mobile_nav_items">
                 <a href="index.php"><i class="fas fa-desktop"></i><span>Home</span></a>
-                <a href="#"><i class="fas fa-cogs"></i><span>Components</span></a>
+                <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Components</span></a>
                 <a href="#"><i class="fas fa-table"></i><span>Tables</span></a>
                 <a href="#"><i class="fas fa-th"></i><span>Forms</span></a>
                 <a href="#"><i class="fas fa-info-circle"></i><span>About</span></a>
@@ -73,11 +96,11 @@
         <!-- Sidebar start -->
         <div class="sidebar">
             <div class="profile_info">
-                <a class="link_foto" href="#"><img src="imagens/perfil.jpg" class="profile_image" alt=""></a>
-                <h4>Herbert</h4>
+                <a class="link_foto" href="pagina_usuario.php"><img src="<?= $img_perfil ?>" class="profile_image" alt=""></a>
+                <h4><?= $usuario ?></h4>
             </div>
             <a href="index.php"><i class="fas fa-desktop"></i><span>Home</span></a>
-            <a href="#"><i class="fas fa-cogs"></i><span>Components</span></a>
+            <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Components</span></a>
             <a href="#"><i class="fas fa-table"></i><span>Tables</span></a>
             <a href="#"><i class="fas fa-th"></i><span>Forms</span></a>
             <a href="#"><i class="fas fa-info-circle"></i><span>About</span></a>
@@ -111,10 +134,10 @@
                                     <br/><br>
                                     <div id="dynamicDiv">
                                         <p>
-                                            <input type="text" id="post[1]" name="post[1]" size="20" value="" placeholder="Adicione um titulo" maxlength="50" required/><br><br>
+                                            <input type="text" id="post[1]" name="post[1]" size="47" value="" placeholder="Adicione um titulo" maxlength="50" required/><br><br>
                                         </p>
                                         <p>
-                                        <textarea id="post[2]" name="post[2]" rows="3" cols="18" placeholder="Adicione um resumo" minlength="50" required></textarea><br><br>
+                                        <textarea id="post[2]" name="post[2]" rows="5" cols="45" placeholder="Adicione um resumo" minlength="50" required></textarea><br><br>
                                         </p>
                                     </div>
                                     <input type="submit" class="btn btn-primary" value="Enviar">
@@ -130,8 +153,8 @@
                                                 {
                                                 qnt_input++;
                                                 $('<p>'+
-                                                    `<input type="text" id="post[${qnt_input}]" name="post[${qnt_input}]" size="20" value="" placeholder="Adicione um titulo" maxlength="50" required/><br><br>`+
-                                                    '<a class="btn btn-danger" href="javascript:void(0)" id="remInput">'+
+                                                    `<input type="text" id="post[${qnt_input}]" name="post[${qnt_input}]" size="47" value="" placeholder="Adicione um titulo" maxlength="50" required/><br><br>`+
+                                                    '<a class="btn btn-danger select_custom" href="javascript:void(0)" id="remInput">'+
                                                         '<span class="glyphicon glyphicon-minus" aria-hidden="true"></span> '+
                                                         'Remover Campo'+
                                                     '</a><br><br>'+
@@ -142,8 +165,8 @@
                                                 {
                                                 qnt_input++;
                                                 $('<p>'+
-                                                    `<textarea id="post[${qnt_input}]" name="post[${qnt_input}]" rows="3" cols="18" placeholder="Conteúdo do Post" minlength="50" required></textarea><br><br>`+
-                                                    '<a class="btn btn-danger" href="javascript:void(0)" id="remInput">'+
+                                                    `<textarea id="post[${qnt_input}]" name="post[${qnt_input}]" rows="5" cols="45" placeholder="Conteúdo do Post" minlength="50" required></textarea><br><br>`+
+                                                    '<a class="btn btn-danger select_custom" href="javascript:void(0)" id="remInput">'+
                                                         '<span class="glyphicon glyphicon-minus" aria-hidden="true"></span> '+
                                                         'Remover Campo'+
                                                     '</a><br><br>'+
@@ -154,8 +177,8 @@
                                                 {
                                                 file_unico = 1;
                                                 $('<p>'+
-                                                    `<input type="hidden" name="MAX_FILE_SIZE" value="99999999"/><input id="imagem" name="imagem[]" type="file" multiple="multiple" required/><br>`+
-                                                    '<a class="btn btn-danger" href="javascript:void(0)" id="remInput1">'+
+                                                    `<input type="hidden" name="MAX_FILE_SIZE" value="99999999"/><input class="form-control select_custom" id="imagem" name="imagem[]" type="file" multiple="multiple" required/><br>`+
+                                                    '<a class="btn btn-danger select_custom" href="javascript:void(0)" id="remInput1">'+
                                                         '<span class="glyphicon glyphicon-minus" aria-hidden="true"></span> '+
                                                         'Remover Campo'+
                                                     '</a><br><br>'+
@@ -190,6 +213,40 @@
         </div>
         </div>
 
+        <div class="modal fade" id="modal-perfil">
+        <div class="modal-dialog">
+            <div class="modal-content modal_custom">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                    <h4 class="modal-title">Perfil</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="container">
+                    <div class="row">
+                        <div class="col-md-1">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="profile_info">
+                                <img src="<?= $img_perfil ?>" class="link_foto margin_custom" alt="">
+                                <h2><?= $usuario ?></h2>
+                                <form method="post" action="atualizar_perfil.php" id="formPost" enctype="multipart/form-data">
+                                    <input type="text" class="input_custom" value="" id="nome" name="nome" placeholder="Insira um nome de usúario" maxlength="50"/><br><br>
+                                    <p>Escolha uma imagem para substituir a do seu perfil</p>
+                                    <input type="hidden" name="MAX_FILE_SIZE" value="99999999"/><input class="form-control input_custom" id="imagem" name="imagem" type="file"/><br>
+                                    <input type="submit" class="btn btn_envio input_custom" value="Enviar">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                  </div>                                             
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+        </div>
+
         <section class="content">
             <div class="Container">
                 <div class="col-sm-9">
@@ -200,6 +257,7 @@
                         </div>
                     </div>
                     <div id="portal">
+                        <?php echo $Post->postar_post(); ?>
                     </div>
                 </div>
 
