@@ -2,21 +2,47 @@
 
     session_start();
 
-    
-    /*function _autoload($class_name)
-        {
-        include $class_name."_classe.php";
-        }*/
-    include "usuario_classe.php";
-    include "post_classe.php";
+    include "Controller/PortalController.php";
 
-    $user = new usuario();
+    /*$user = new usuario();
     $name_usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
     $img_usuario  = isset($_SESSION['img_perfil']) ? $_SESSION['img_perfil'] : NULL;
     $user -> verifica_login($name_usuario, $img_usuario);
     $usuario = $user -> recebe_nome_usuario();
-    $img_perfil = $user -> recebe_foto_usuario();
-    $Post = new Post();
+    $img_perfil = $user -> recebe_foto_usuario();*/
+
+    $Usuario = new UsuarioController();
+    $_SESSION['usuario'] = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
+    $_SESSION['img_perfil'] = isset($_SESSION['img_perfil']) ? $_SESSION['img_perfil'] : NULL;
+    $RetornoVerLogin = $Usuario->VerificaLoginController();
+    $usuario = $RetornoVerLogin[0];
+    $img_perfil = $RetornoVerLogin[1];
+
+    $Post = new PostController();
+
+    if(isset($_GET['Controller']))
+        {
+        $objeto = $_GET['Controller'];
+        if($objeto == "Usuario")
+            {
+            if(isset($_GET['Action']))
+                {
+                $metodo = $_GET['Action'];
+                //Neste exemplo assim como acima utilizamos o GET para dessa vez passar um método dinamicamente
+                eval("\$Usuario->\$metodo();");
+                }
+            }
+
+        if($objeto == "Post")
+            {
+            if(isset($_GET['Action']))
+                {
+                $metodo = $_GET['Action'];
+                //Neste exemplo assim como acima utilizamos o GET para dessa vez passar um método dinamicamente
+                eval("\$Post->\$metodo();");
+                }
+            }
+        }
 ?>
 
 <!DOCTYPE html>
@@ -82,9 +108,9 @@
             </div>
             <div class="mobile_nav_items">
                 <a href="#"><i class="fas fa-desktop"></i><span>Home</span></a>
-                <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Components</span></a>
-                <a href="categorias.php"><i class="fas fa-table"></i><span>Tables</span></a>
-                <a href="#"><i class="fas fa-th"></i><span>Forms</span></a>
+                <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Configure seu perfil</span></a>
+                <a href="categorias.php"><i class="fas fa-table"></i><span>Categorias</span></a>
+                <a href="#"><i class="fas fa-th"></i><span>Novidades</span></a>
                 <a href="#"><i class="fas fa-info-circle"></i><span>Deslogar</span></a>
                 <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
             </div>
@@ -98,9 +124,9 @@
                 <h4><?= $usuario ?></h4>
             </div>
             <a href="#"><i class="fas fa-desktop"></i><span>Home</span></a>
-            <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Components</span></a>
-            <a href="categorias.php"><i class="fas fa-table"></i><span>Tables</span></a>
-            <a href="#"><i class="fas fa-th"></i><span>Forms</span></a>
+            <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Configure seu perfil</span></a>
+            <a href="categorias.php"><i class="fas fa-table"></i><span>Categorias</span></a>
+            <a href="#"><i class="fas fa-th"></i><span>Novidades</span></a>
             <a href="#"><i class="fas fa-info-circle"></i><span>Deslogar</span></a>
             <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
         </div>
@@ -122,10 +148,10 @@
                             <div class="profile_info">
                                 <img src="<?= $img_perfil ?>" class="link_foto margin_custom" alt="">
                                 <h2><?= $usuario ?></h2>
-                                <form method="post" action="atualizar_perfil.php" id="formPost" enctype="multipart/form-data">
-                                    <input type="text" class="input_custom" value="" id="nome" name="nome" placeholder="Insira um nome de usúario" maxlength="50"/><br><br>
+                                <form method="post" action="index.php?Controller=Usuario&Action=AtualizaUsuarioController" id="formPost" enctype="multipart/form-data">
+                                    <input type="text" class="input_custom" value="" id="nome" name="nome" placeholder="Insira um novo nome de usúario" maxlength="50"/><br><br>
                                     <p>Escolha uma imagem para substituir a do seu perfil</p>
-                                    <input type="hidden" name="MAX_FILE_SIZE" value="99999999"/><input class="form-control input_custom" id="imagem" name="imagem" type="file"/><br>
+                                    <input type="hidden" name="MAX_FILE_SIZE" value="99999999"/><input class="form-control input_custom" id="imgPerfil" name="imgPerfil" type="file"/><br>
                                     <input type="submit" class="btn btn_envio input_custom" value="Enviar">
                                 </form>
                             </div>
@@ -144,7 +170,7 @@
             <div class="Container">
                 <div class="col-sm-9">
                     <div id="portal">
-                        <?php echo $Post->postar_post(); ?>
+                        <?php echo $Post->PegarAllPostController(); ?>
                     </div>
                 </div>
                 <div class="col-sm-1"></div>

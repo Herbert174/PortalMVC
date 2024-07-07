@@ -2,6 +2,8 @@
 
     session_start();
 
+    include "Controller/PortalController.php";
+
     $id_post     = $_SESSION['id_post'];
 	$id_usuario  = $_SESSION['id_usuario'];
 	$post        = $_SESSION['post'];
@@ -9,14 +11,21 @@
 	$titulo_post = $_SESSION['titulo_post'];
 	$resumo_post = $_SESSION['resumo_post'];
 
-    require_once('usuario_classe.php');
+    /*require_once('usuario_classe.php');
 
     $user = new usuario();
     $name_usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
     $img_usuario  = isset($_SESSION['img_perfil']) ? $_SESSION['img_perfil'] : NULL;
     $user -> verifica_login($name_usuario, $img_usuario);
     $usuario = $user -> recebe_nome_usuario();
-    $img_perfil = $user -> recebe_foto_usuario();
+    $img_perfil = $user -> recebe_foto_usuario();*/
+
+    $Usuario = new UsuarioController();
+    $_SESSION['usuario'] = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
+    $_SESSION['img_perfil'] = isset($_SESSION['img_perfil']) ? $_SESSION['img_perfil'] : NULL;
+    $RetornoVerLogin = $Usuario->VerificaLoginController();
+    $usuario = $RetornoVerLogin[0];
+    $img_perfil = $RetornoVerLogin[1];
 
 ?>
 
@@ -123,7 +132,7 @@
                             <div class="profile_info">
                                 <img src="<?= $img_perfil ?>" class="link_foto margin_custom" alt="">
                                 <h2><?= $usuario ?></h2>
-                                <form method="post" action="atualizar_perfil.php" id="formPost" enctype="multipart/form-data">
+                                <form method="post" action="index.php?Controller=Usuario&Action=AtualizaUsuarioController" id="formPost" enctype="multipart/form-data">
                                     <input type="text" class="input_custom" value="" id="nome" name="nome" placeholder="Insira um nome de usúario" maxlength="50"/><br><br>
                                     <p>Escolha uma imagem para substituir a do seu perfil</p>
                                     <input type="hidden" name="MAX_FILE_SIZE" value="99999999"/><input class="form-control input_custom" id="imagem" name="imagem" type="file"/><br>
@@ -153,8 +162,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="col-md-12"> 
-                                            <h2 class="texto-capa"><?= $resumo_post ?></h2>                
+                                        <div class="col-md-12">
                                             <?= $post ?>
                                         </div>
                                     </div>

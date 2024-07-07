@@ -2,14 +2,23 @@
 
     session_start();
 
-    require_once('usuario_classe.php');
+    include "Controller/PortalController.php";
 
-    $user = new usuario();
+    //require_once('usuario_classe.php');
+
+    /*$user = new usuario();
     $name_usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
     $img_usuario  = isset($_SESSION['img_perfil']) ? $_SESSION['img_perfil'] : NULL;
     $user -> verifica_login($name_usuario, $img_usuario);
     $usuario = $user -> recebe_nome_usuario();
-    $img_perfil = $user -> recebe_foto_usuario();
+    $img_perfil = $user -> recebe_foto_usuario();*/
+
+    $Usuario = new UsuarioController();
+    $_SESSION['usuario'] = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
+    $_SESSION['img_perfil'] = isset($_SESSION['img_perfil']) ? $_SESSION['img_perfil'] : NULL;
+    $RetornoVerLogin = $Usuario->VerificaLoginController();
+    $usuario = $RetornoVerLogin[0];
+    $img_perfil = $RetornoVerLogin[1];
 
     $erro_usuario = isset($_GET['erro_usuario']) ? $_GET['erro_usuario'] : 0;
     $erro_email = isset($_GET['erro_email']) ? $_GET['erro_email'] : 0;
@@ -95,7 +104,7 @@
             <div class="Container">
                 <div class="col-sm-8 custom2">
                 <h2 class="centro">Cadastrar-se</h2>
-                    <form method="post" action="registra_usuario.php" id="formCadastrarse">
+                    <form method="post" action="index.php?Controller=Usuario&Action=RegistraUsuarioController" id="formCadastrarse">
                         <div class="form-group">
                             <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuário" required="required">
                             <?php

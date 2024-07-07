@@ -2,17 +2,26 @@
 
     session_start();
 
-    require_once('usuario_classe.php');
+    include "Controller/PortalController.php";
 
-    $user = new usuario();
+    //require_once('usuario_classe.php');
+
+    /*$user = new usuario();
     $name_usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
     $img_usuario  = isset($_SESSION['img_perfil']) ? $_SESSION['img_perfil'] : NULL;
     $user -> verifica_login($name_usuario, $img_usuario);
     $usuario = $user -> recebe_nome_usuario();
-    $img_perfil = $user -> recebe_foto_usuario();
+    $img_perfil = $user -> recebe_foto_usuario();*/
+
+    $Usuario = new UsuarioController();
+    $_SESSION['usuario'] = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
+    $_SESSION['img_perfil'] = isset($_SESSION['img_perfil']) ? $_SESSION['img_perfil'] : NULL;
+    $RetornoVerLogin = $Usuario->VerificaLoginController();
+    $usuario = $RetornoVerLogin[0];
+    $img_perfil = $RetornoVerLogin[1];
 
     $erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
-    $sucesso = isset($_GET['sucesso_registro']) ? $_GET['sucesso_registro'] : 0;
+    //$sucesso = isset($_GET['sucesso_registro']) ? $_GET['sucesso_registro'] : 0;
 ?>
 
 <!DOCTYPE html>
@@ -95,7 +104,7 @@
             <div class="Container">
                 <div class="col-sm-8 custom2">
                     <h2 class="centro">Já tenho uma conta</h2>
-                    <form method="post" action="validar_acesso.php" id="formLogin">
+                    <form method="post" action="index.php?Controller=Usuario&Action=LoginUsuarioController" id="formLogin">
                         <div class="form-group">
                             <input type="text" class="form-control" id="campo_usuario" name="usuario" placeholder="Usuário" required="required"/>
                         </div>
@@ -110,10 +119,6 @@
                         if($erro == 1)
                             {   
                             echo '<font color="#FF0000">Usuario e ou senha invalido(s)</font>';
-                            }
-                        if($sucesso == 1)
-                            {
-                            echo '<font color="#0E7411">Conta criada com sucesso! realize o login para continuar</font>';
                             }
                     ?>
                     <p class="direita">Não possui uma conta? <a href="cadastrar.php">Registre-se aqui</a></p>

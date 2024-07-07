@@ -9,11 +9,15 @@
         private $ResumoPost;
         private $UsuarioPost;
         private $CategoriaPost;
-        private $RetornoPost;
 
         public function retornaIdPost()
             {
             return $this->IdPost;
+            }
+
+        public function defineIdPost($IdEnviado)
+            {
+            $this->IdPost = $IdEnviado;
             }
 
         public function retornaPost()
@@ -74,16 +78,6 @@
         public function defineCategoriaPost($CategoriaPostEnviado)
             {
             $this->CategoriaPost = $CategoriaPostEnviado;
-            }
-
-        public function retornaRetornoPost()
-            {
-            return $this->RetornoPost;
-            }
-
-        public function defineRetornoPost($RetornoPostEnviado)
-            {
-            $this->RetornoPost = $RetornoPostEnviado;
             }
         }
 

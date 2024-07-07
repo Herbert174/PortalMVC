@@ -5,6 +5,7 @@
         public function MontarPost(PostVO $Post)
             {
             $POST = $Post->retornaPost();
+            $postando = '';
             foreach($POST as $item_post)
                 {
                 if(strlen($item_post)<=0)
@@ -46,13 +47,13 @@
                     $postando.='<img class="img-responsive img_postagem2" src='.$path.'><br><br>';
                     if($img==0)
                         {
-                        $ImgPost = $path;
+                        $Post->DefineImgPost($path);
                         }
                     }  
                 }
 
             $Post->DefinePost($postando);
-            $Post->DefineImgPost($ImgPost);
+            
 
             return $Post;
             }
@@ -64,23 +65,22 @@
             $img_post = $Post->retornaImgPost();
             $titulo_post = $Post->retornaTituloPost();
             $resumo_post = $Post->retornaResumoPost();
+            $categoria = $Post->retornaCategoriaPost();
 
-            $sql = " INSERT INTO post(id_usuario, post, img_post, titulo_post, resumo_post) ";
-            $sql .= " values('$usuario', '$post', '$img_post', '$titulo_post', '$resumo_post') ";
+            $sql = " INSERT INTO post(id_usuario, post, img_post, titulo_post, resumo_post, categoria) ";
+            $sql .= " values('$usuario', '$post', '$img_post', '$titulo_post', '$resumo_post', '$categoria') ";
 
             $objDb = new database();
             $link = $objDb->conecta_mysql();
-            $resultado_produto = mysqli_query($link, $sql);
 
-            if($resultado_produto)
+            if($resultado_post = mysqli_query($link, $sql))
                 {
-                echo "Post enviado com sucesso, já pode direcionar para View";
-                }else{
-                    echo "Erro ao enviar o post";
-                    }
+                return true;
+                }else
+                    return false;
             }
 
-        public function PostarAllPosts()
+        public function PegarAllPosts()
             {
             $objDb = new database();
             $link = $objDb -> conecta_mysql();
@@ -92,32 +92,12 @@
             if($resultado_lista = mysqli_query($link, $sql))
                 {
                 $lista = mysqli_fetch_all($resultado_lista, MYSQLI_ASSOC);
-                }
-
-            foreach ($lista as $posts)
-                {
-                $retorno_lista .= '<div class="row custom">';
-                $retorno_lista .= '<div class="col-sm-3">';
-                $retorno_lista .= '<img src="'.$posts['img_post'].'" class="img_postagem">';
-                $retorno_lista .= '</div>';
-                $retorno_lista .= '<div class="col-sm-9">';
-                $retorno_lista .= '<div class="row">';
-                $retorno_lista .= '<span class="negrito">'.$posts['titulo_post'].'</span>';
-                $retorno_lista .= '</div>';
-                $retorno_lista .= '<div class="row">';
-                $retorno_lista .= '<p>'.$posts['resumo_post'].'<a href="consulta_post.php?post='.$posts['id_post'].'">leia mais...</a></p>';
-                $retorno_lista .= '</div>';
-                $retorno_lista .= '<div class="row">';
-                $retorno_lista .= 'Comentarios: Que post excelente';
-                $retorno_lista .= '</div>';
-                $retorno_lista .= '</div>';
-                $retorno_lista .= '</div>';
-                }
-
-            return $retorno_lista;
+                return $lista;
+                }else 
+                    return false;
             }
 
-        public function Post_Categoria($Categoria)
+        public function PegarPostCategoria($Categoria)
             {
             $categoria = $Categoria;
 
@@ -131,29 +111,64 @@
             if($resultado_lista = mysqli_query($link, $sql))
                 {
                 $lista = mysqli_fetch_all($resultado_lista, MYSQLI_ASSOC);
-                }
-                
-            foreach ($lista as $posts)
+                return $lista;
+                }else
+                    return false;
+            }
+
+        public function ConsultaPost($IDPost)
+            {
+            $IdPost = $IDPost;
+
+            $objDb = new database();
+            $link = $objDb -> conecta_mysql();
+
+            $sql = " SELECT * FROM post where id_post = '$IdPost' ";
+
+            if($Resultado_Post = mysqli_query($link, $sql))
                 {
-                $retorno_lista .= '<div class="row custom">';
-                $retorno_lista .= '<div class="col-sm-3">';
-                $retorno_lista .= '<img src="'.$posts['img_post'].'" class="img_postagem">';
-                $retorno_lista .= '</div>';
-                $retorno_lista .= '<div class="col-sm-9">';
-                $retorno_lista .= '<div class="row">';
-                $retorno_lista .= '<span class="negrito">'.$posts['titulo_post'].'</span>';
-                $retorno_lista .= '</div>';
-                $retorno_lista .= '<div class="row">';
-                $retorno_lista .= '<p>'.$posts['resumo_post'].'<a href="consulta_post.php?post='.$posts['id_post'].'">leia mais...</a></p>';
-                $retorno_lista .= '</div>';
-                $retorno_lista .= '<div class="row">';
-                $retorno_lista .= 'Comentarios: Que post excelente';
-                $retorno_lista .= '</div>';
-                $retorno_lista .= '</div>';
-                $retorno_lista .= '</div>';
-                }
-                    
-            return $retorno_lista;
+                $Post = mysqli_fetch_array($Resultado_Post);
+                return $Post;
+                }else
+                    return false;
+            }
+
+        public function AtualizarPost(PostVO $Post)
+            {
+            $usuario = $Post->retornaUsuarioPost();
+            $post = $Post->retornaPost();
+            $img_post = $Post->retornaImgPost();
+            $titulo_post = $Post->retornaTituloPost();
+            $resumo_post = $Post->retornaResumoPost();
+            $id_post = $Post->retornaIdPost();
+
+            $sql = " UPDATE post SET id_usuario = '$usuario', post = '$post', img_post = '$img_post', ";
+            $sql .= " titulo_post = '$titulo_post', resumo_post = '$resumo_post' WHERE id_post = '$id_post' ";
+
+            $objDb = new database();
+            $link = $objDb -> conecta_mysql();
+
+            if($resultado_post = mysqli_query($link, $sql))
+                {
+                return true;
+                } else 
+                    return false;
+            }
+
+        public function ApagarPost(PostVO $Post)
+            {
+            $id_post = $Post->retornaIdPost();
+
+            $sql = " DELETE FROM post WHERE id_post = '$id_post' ";
+
+            $objDb = new database();
+            $link = $objDb -> conecta_mysql();
+
+            if($resultado_post = mysqli_query($link, $sql))
+                {
+                return true;
+                } else 
+                    return false;
             }
         }
 

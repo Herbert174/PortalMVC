@@ -2,9 +2,11 @@
 
     session_start();
 
+    include "Controller/PortalController.php";
+
     $categoria = $_GET['categoria'];
 
-    function __autoload($class_name)
+    /*function __autoload($class_name)
         {
         include $class_name."_classe.php";
         }
@@ -15,7 +17,17 @@
     $user -> verifica_login($name_usuario, $img_usuario);
     $usuario = $user -> recebe_nome_usuario();
     $img_perfil = $user -> recebe_foto_usuario();
-    $Post = new Post();
+    $Post = new Post();*/
+
+    $Usuario = new UsuarioController();
+    $_SESSION['usuario'] = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
+    $_SESSION['img_perfil'] = isset($_SESSION['img_perfil']) ? $_SESSION['img_perfil'] : NULL;
+    $RetornoVerLogin = $Usuario->VerificaLoginController();
+    $usuario = $RetornoVerLogin[0];
+    $img_perfil = $RetornoVerLogin[1];
+
+    $Post = new PostController();
+
 ?>
 
 <!DOCTYPE html>
@@ -121,7 +133,7 @@
                             <div class="profile_info">
                                 <img src="<?= $img_perfil ?>" class="link_foto margin_custom" alt="">
                                 <h2><?= $usuario ?></h2>
-                                <form method="post" action="atualizar_perfil.php" id="formPost" enctype="multipart/form-data">
+                                <form method="post" action="index.php?Controller=Usuario&Action=AtualizaUsuarioController" id="formPost" enctype="multipart/form-data">
                                     <input type="text" class="input_custom" value="" id="nome" name="nome" placeholder="Insira um nome de usúario" maxlength="50"/><br><br>
                                     <p>Escolha uma imagem para substituir a do seu perfil</p>
                                     <input type="hidden" name="MAX_FILE_SIZE" value="99999999"/><input class="form-control input_custom" id="imagem" name="imagem" type="file"/><br>
@@ -143,7 +155,7 @@
             <div class="Container">
                 <div class="col-sm-9">
                     <div id="portal">
-                        <?php echo $Post->post_categoria($categoria); ?>
+                        <?php echo $Post->PegarPostCategoriaController(); ?>
                     </div>
                 </div>
                 <div class="col-sm-1"></div>
