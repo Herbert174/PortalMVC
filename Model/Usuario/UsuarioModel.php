@@ -69,6 +69,12 @@
                      $Usuario->defineImgUsuario('imagens/logo.png');
                      }
             }
+
+        public function GetAllUsuariosModel()
+            {
+            $usuarios = new UsuarioDAO();
+            return $usuarios->GetAllUsuarios();
+            }
         }
 
 ?>

@@ -78,6 +78,12 @@
 
             return [$VO->retornaNomeUsuario(), $VO->retornaImgUsuario()];
             }
+
+        public function GetAllUsuariosController()
+            {
+            $Model = new UsuarioModel();
+            return $usuarios = $Model->GetAllUsuariosModel();
+            }
         }
 
 ?>

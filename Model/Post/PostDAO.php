@@ -5,6 +5,8 @@
         public function MontarPost(PostVO $Post)
             {
             $POST = $Post->retornaPost();
+            
+            //die(var_dump($Post));
             $postando = '';
             foreach($POST as $item_post)
                 {
@@ -14,11 +16,21 @@
                     }
                 if(strlen($item_post) < 50)
                     {
-                    $postando.="<h2>$item_post</h2>";
+                    if(filter_var($item_post, FILTER_VALIDATE_URL) !== false)
+                        {
+                        $postando.='<img class="img-responsive img_postagem2" src='.$item_post.'><br><br>';
+                        }else{
+                            $postando.="<h2>$item_post</h2>";
+                            }
                     }
                 if(strlen($item_post) > 50)
                     {
-                    $postando.="<p>$item_post</p>";
+                    if(filter_var($item_post, FILTER_VALIDATE_URL) !== false)
+                        {
+                        $postando.='<img class="img-responsive img_postagem2" src='.$item_post.'><br><br>';
+                        }else{
+                            $postando.="<p>$item_post</p>";
+                            }
                     }
                 }
 
@@ -48,11 +60,15 @@
                     if($img==0)
                         {
                         $Post->DefineImgPost($path);
+                        die(var_dump($imagem));
                         }
                     }  
                 }
 
             $Post->DefinePost($postando);
+
+            //sort($numeros, SORT_NATURAL); SORT_NATURAL responsável por ordenar um array de maneira crescente
+            //talvez seja util para conseguir organizar a sequencia do post com as imagens
             
 
             return $Post;

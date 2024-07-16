@@ -16,7 +16,7 @@
                 $retorno_lista .= '<span class="negrito">'.$post['titulo_post'].'</span>';
                 $retorno_lista .= '</div>';
                 $retorno_lista .= '<div class="row">';
-                $retorno_lista .= '<p>'.$post['resumo_post'].'<a href="consulta_post.php?post='.$post['id_post'].'">leia mais...</a></p>';
+                $retorno_lista .= '<p>'.$post['resumo_post'].'<a href="index.php?Controller=Post&Action=PegarPostController&post='.$post['id_post'].'">leia mais...</a></p>';
                 $retorno_lista .= '</div>';
                 $retorno_lista .= '<div class="row">';
                 $retorno_lista .= 'Comentarios: Que post excelente';
@@ -41,7 +41,7 @@
                 $retorno_lista .= '<span class="negrito">'.$post['titulo_post'].'</span>';
                 $retorno_lista .= '</div>';
                 $retorno_lista .= '<div class="row">';
-                $retorno_lista .= '<p>'.$post['resumo_post'].'<a href="consulta_post.php?post='.$post['id_post'].'">leia mais...</a></p>';
+                $retorno_lista .= '<p>'.$post['resumo_post'].'<a href="index.php?Controller=Post&Action=PegarPostController&post='.$post['id_post'].'">leia mais...</a></p>';
                 $retorno_lista .= '</div>';
                 $retorno_lista .= '<div class="row">';
                 $retorno_lista .= 'Comentarios: Que post excelente';
@@ -52,11 +52,12 @@
             return $retorno_lista;
             }
 
-        public function ExibirPost($post)
+        public function ExibirPostView($post)
             {
             $Post = $post;
 			$_SESSION['titulo_post'] = $Post['titulo_post'];
 			$_SESSION['resumo_post'] = $Post['resumo_post'];
+            $_SESSION['post'] = $Post['post'];
             return $post;
             }
         }

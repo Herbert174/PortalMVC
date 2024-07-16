@@ -6,19 +6,6 @@
 
     $categoria = $_GET['categoria'];
 
-    /*function __autoload($class_name)
-        {
-        include $class_name."_classe.php";
-        }
-
-    $user = new usuario();
-    $name_usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
-    $img_usuario  = isset($_SESSION['img_perfil']) ? $_SESSION['img_perfil'] : NULL;
-    $user -> verifica_login($name_usuario, $img_usuario);
-    $usuario = $user -> recebe_nome_usuario();
-    $img_perfil = $user -> recebe_foto_usuario();
-    $Post = new Post();*/
-
     $Usuario = new UsuarioController();
     $_SESSION['usuario'] = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
     $_SESSION['img_perfil'] = isset($_SESSION['img_perfil']) ? $_SESSION['img_perfil'] : NULL;
@@ -92,12 +79,12 @@
                 <i class="fa fa-bars nav_btn"></i>
             </div>
             <div class="mobile_nav_items">
-                <a href="index.php"><i class="fas fa-desktop"></i><span>Home</span></a>
-                <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Components</span></a>
-                <a href="categorias.php"><i class="fas fa-table"></i><span>Tables</span></a>
-                <a href="#"><i class="fas fa-th"></i><span>Forms</span></a>
+                <a href="index.php"><i class="fas fa-desktop"></i><span>Inicio</span></a>
+                <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Configure seu perfil</span></a>
+                <a href="categorias.php"><i class="fas fa-table"></i><span>Categorias</span></a>
+                <a href="#"><i class="fas fa-th"></i><span>Novidades</span></a>
                 <a href="#"><i class="fas fa-info-circle"></i><span>Deslogar</span></a>
-                <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
+                <a href="PainelDigievolucao.php"><i class="fas fa-sliders-h"></i><span>Painel Digievolução</span></a>
             </div>
         </div>
         <!-- Mobile navigation bar end -->
@@ -108,12 +95,12 @@
                 <a class="link_foto" href="pagina_usuario.php"><img src="<?= $img_perfil ?>" class="profile_image" alt=""></a>
                 <h4><?= $usuario ?></h4>
             </div>
-            <a href="index.php"><i class="fas fa-desktop"></i><span>Home</span></a>
-            <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Components</span></a>
-            <a href="categorias.php"><i class="fas fa-table"></i><span>Tables</span></a>
-            <a href="#"><i class="fas fa-th"></i><span>Forms</span></a>
+            <a href="index.php"><i class="fas fa-desktop"></i><span>Inicio</span></a>
+            <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Configure seu perfil</span></a>
+            <a href="categorias.php"><i class="fas fa-table"></i><span>Categorias</span></a>
+            <a href="#"><i class="fas fa-th"></i><span>Novidades</span></a>
             <a href="#"><i class="fas fa-info-circle"></i><span>Deslogar</span></a>
-            <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
+            <a href="PainelDigievolucao.php"><i class="fas fa-sliders-h"></i><span>Painel Digievolução</span></a>
         </div>
         <!-- Sidebar end -->
 

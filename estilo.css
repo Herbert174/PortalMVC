@@ -302,6 +302,8 @@ label #sidebar_btn:hover{
 .modal_custom{background: #2f323a; color: white;}
 .modal_custom form{color: black;}
 .modal_custom p{color: white;}
+.input_direita{float: right;}
+.select_PainelDig{padding-left: 30px; background: url(Sprites/Birdramon.gif) no-repeat; background-position: left 7px top 7px;}
 /* ----------------- Seção rodapé ------------------- */
 
 

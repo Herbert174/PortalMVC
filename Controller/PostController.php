@@ -32,6 +32,12 @@
             return $Posts;
             }
 
+        public function AllPostController()
+            {
+            $Model = new PostModel();
+            return $posts = $Model->PegarAllPostModel();
+            }
+
         public function PegarPostCategoriaController()
             {
             $Categoria = $_GET['categoria'];
@@ -49,7 +55,7 @@
             $post = $Model->ConsultaPostModel($IdPost);
             $View = new PostView();
             $Post = $View->ExibirPostView($post);
-            return $Post;
+            header("Location: noticias1.php");
             }
 
         public function AtualizarPostController()

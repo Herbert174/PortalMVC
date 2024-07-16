@@ -190,6 +190,21 @@
                 } else
                     return false;
             }
+
+        public function GetAllUsuarios() //Realiza o acesso do usuario no sistema
+            {
+            $objDb = new database();
+            $link = $objDb->conecta_mysql();
+            
+            $sql = " SELECT * FROM usuarios ";
+
+            if($resultado_lista = mysqli_query($link, $sql))
+                {
+                $lista = mysqli_fetch_all($resultado_lista, MYSQLI_ASSOC);
+                return $lista;
+                }else 
+                    return false;
+            }
         
         }
 

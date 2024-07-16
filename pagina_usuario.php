@@ -2,17 +2,7 @@
 
     session_start();
 
-    /*require_once('usuario_classe.php');
-    require_once('post_classe.php');*/
-
     include "Controller/PortalController.php";
-
-    /*$user = new usuario();
-    $name_usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
-    $img_usuario  = isset($_SESSION['img_perfil']) ? $_SESSION['img_perfil'] : NULL;
-    $user -> verifica_login($name_usuario, $img_usuario);
-    $usuario = $user -> recebe_nome_usuario();
-    $img_perfil = $user -> recebe_foto_usuario();*/
 
     $Usuario = new UsuarioController();
     $_SESSION['usuario'] = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
@@ -93,12 +83,12 @@
                 <i class="fa fa-bars nav_btn"></i>
             </div>
             <div class="mobile_nav_items">
-                <a href="index.php"><i class="fas fa-desktop"></i><span>Home</span></a>
-                <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Components</span></a>
-                <a href="#"><i class="fas fa-table"></i><span>Tables</span></a>
-                <a href="#"><i class="fas fa-th"></i><span>Forms</span></a>
-                <a href="#"><i class="fas fa-info-circle"></i><span>About</span></a>
-                <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
+                <a href="index.php"><i class="fas fa-desktop"></i><span>Inicio</span></a>
+                <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Configure seu perfil</span></a>
+                <a href="categorias.php"><i class="fas fa-table"></i><span>Categorias</span></a>
+                <a href="#"><i class="fas fa-th"></i><span>Novidades</span></a>
+                <a href="#"><i class="fas fa-info-circle"></i><span>Deslogar</span></a>
+                <a href="PainelDigievolucao.php"><i class="fas fa-sliders-h"></i><span>Painel Digievolução</span></a>
             </div>
         </div>
         <!-- Mobile navigation bar end -->
@@ -109,12 +99,12 @@
                 <a class="link_foto" href="pagina_usuario.php"><img src="<?= $img_perfil ?>" class="profile_image" alt=""></a>
                 <h4><?= $usuario ?></h4>
             </div>
-            <a href="index.php"><i class="fas fa-desktop"></i><span>Home</span></a>
-            <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Components</span></a>
-            <a href="#"><i class="fas fa-table"></i><span>Tables</span></a>
-            <a href="#"><i class="fas fa-th"></i><span>Forms</span></a>
-            <a href="#"><i class="fas fa-info-circle"></i><span>About</span></a>
-            <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
+            <a href="index.php"><i class="fas fa-desktop"></i><span>Inicio</span></a>
+            <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Configure seu perfil</span></a>
+            <a href="categorias.php"><i class="fas fa-table"></i><span>Categorias</span></a>
+            <a href="#"><i class="fas fa-th"></i><span>Novidades</span></a>
+            <a href="#"><i class="fas fa-info-circle"></i><span>Deslogar</span></a>
+            <a href="PainelDigievolucao.php"><i class="fas fa-sliders-h"></i><span>Painel Digievolução</span></a>
         </div>
         <!-- Sidebar end -->
 
@@ -129,12 +119,13 @@
                   <div class="container">
                     <div class="row">
                         <div class="col-md-6">
-                            <form method="post" action="enviar_post.php" id="formPost" enctype="multipart/form-data">
+                            <form method="post" action="index.php?Controller=Post&Action=EnviarPostController" id="formPost" enctype="multipart/form-data">
                                 <div class="container">
                                     <select class="form-control select_custom" id="tipoInput">
                                         <option value="1">Titulo</option>
                                         <option value="2">Conteúdo</option>
-                                        <option value="3">Imagem</option>
+                                        <option value="3">Link de imagem</option>
+                                        <option value="4">Imagem de capa</option>
                                     </select>
                                     <br/>
                                     <a class="btn btn-primary select_custom" href="javascript:void(0)" id="addInput">
@@ -183,11 +174,24 @@
                                                 '</p>').appendTo(scntDiv);
                                                 return false;
                                                 }
-                                            if($('#tipoInput :selected').val() == 3 && file_unico == 0)
+                                            if($('#tipoInput :selected').val() == 3)
                                                 {
+                                                qnt_input++;
+                                                $('<p>'+
+                                                    `<input type="url" id="post[${qnt_input}]" name="post[${qnt_input}]" size="47" value="" placeholder="Adicione uma url ex: http://www." required/><br><br>`+
+                                                    '<a class="btn btn-danger select_custom" href="javascript:void(0)" id="remInput">'+
+                                                        '<span class="glyphicon glyphicon-minus" aria-hidden="true"></span> '+
+                                                        'Remover Campo'+
+                                                    '</a><br><br>'+
+                                                '</p>').appendTo(scntDiv);
+                                                return false;
+                                                }
+                                            if($('#tipoInput :selected').val() == 4 && file_unico == 0)//Criar um id post com qnt_input tbm para file para referenciar
+                                                {
+                                                qnt_input++;
                                                 file_unico = 1;
                                                 $('<p>'+
-                                                    `<input type="hidden" name="MAX_FILE_SIZE" value="99999999"/><input class="form-control select_custom" id="imagem" name="imagem[]" type="file" multiple="multiple" required/><br>`+
+                                                    `<input type="hidden" name="MAX_FILE_SIZE" value="99999999"/><input class="form-control select_custom" id="post[${qnt_input}]" name="imagem[]" type="file" required/><br>`+
                                                     '<a class="btn btn-danger select_custom" href="javascript:void(0)" id="remInput1">'+
                                                         '<span class="glyphicon glyphicon-minus" aria-hidden="true"></span> '+
                                                         'Remover Campo'+
