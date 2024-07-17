@@ -15,6 +15,8 @@
 
     $posts = $Post->AllPostController();
     $usuarios = $Usuario->GetAllUsuariosController();
+    $nUsuarios = count($usuarios);
+    $nPosts = count($posts);
 ?>
 
 <!DOCTYPE html>
@@ -81,10 +83,10 @@
             <div class="mobile_nav_items">
                 <a href="PainelControleGerenciamento.php"><i class="fas fa-desktop"></i><span>Inicio Painel</span></a>
                 <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Configure seu perfil</span></a>
-                <a href="categorias.php"><i class="fas fa-table"></i><span>Gerenciar Post</span></a>
+                <a href="#"><i class="fas fa-table"></i><span>Gerenciar Post</span></a>
                 <a href="#"><i class="fas fa-th"></i><span>Gerenciar Usuarios</span></a>
+                <a href="#"><i class="fas fa-sliders-h"></i><span>Gerenciar Comentarios</span></a>
                 <a href="index.php"><i class="fas fa-info-circle"></i><span>Voltar</span></a>
-                <a href="PainelDigievolucao.php"><i class="fas fa-sliders-h"></i><span>Painel Digievolução</span></a>
             </div>
         </div>
         <!-- Mobile navigation bar end -->
@@ -97,10 +99,10 @@
             </div>
             <a href="PainelControleGerenciamento.php"><i class="fas fa-desktop"></i><span>Inicio Painel</span></a>
             <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Configure seu perfil</span></a>
-            <a href="categorias.php"><i class="fas fa-table"></i><span>Gerenciar Post</span></a>
+            <a href="#"><i class="fas fa-table"></i><span>Gerenciar Post</span></a>
             <a href="#"><i class="fas fa-th"></i><span>Gerenciar Usuarios</span></a>
+            <a href="#"><i class="fas fa-sliders-h"></i><span>Gerenciar Comentarios</span></a>
             <a href="index.php"><i class="fas fa-info-circle"></i><span>Voltar</span></a>
-            <a href="PainelDigievolucao.php"><i class="fas fa-sliders-h"></i><span>Painel Digievolução</span></a>
         </div>
         <!-- Sidebar end -->
 
@@ -142,46 +144,28 @@
             <div class="Container">
                 <div class="col-sm-12">
                     <div class="row custom">
-                        <h2 class="centro">Painel geral</h2>
-                        <table class="table table-hover">
-                            <thead class="tabela_custom">
-                                <tr>
-                                    <th scope="col" colspan="5" class="centro">Posts</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <?php   foreach($posts as $post):?>
-                                <tr>
-                                    <td><?= $post['id_usuario'] ?></td>
-                                    <td><?= $post['img_post'] ?></td>
-                                    <td><?= $post['titulo_post'] ?></td>
-                                    <td><?= $post['categoria'] ?></td>
-                                    <td><?= $post['data_post'] ?></td>
-                                </tr>
-                                <?php endforeach; ?>
-                                
-                            </tboby>
-                        </table>
-
-                        <table class="table table-hover">
-                            <thead class="tabela_custom">
-                                <tr>
-                                    <th scope="col" colspan="4" class="centro">Usuarios</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <?php   foreach($usuarios as $user):?>
-                                    <tr>
-                                    <td><?= $user['id_usuario'] ?></td>
-                                    <td><?= $user['img_perfil'] ?></td>
-                                    <td><?= $user['nome'] ?></td>
-                                    <td><?= $user['email'] ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tboby>
-                        </table>
+                        <h2 class="centro">Visão geral</h2>
+                        <div class="col-sm-4">
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Qntd de Usuarios total
+                                    <span class="badge badge-primary badge-pill"><?= $nUsuarios; ?></span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Qntd de Posts total
+                                    <span class="badge badge-primary badge-pill"><?= $nPosts; ?></span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Qntd de Comentarios total
+                                    <span class="badge badge-primary badge-pill">1</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Qntd de denuncias não vistas total
+                                    <span class="badge badge-primary badge-pill">1</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-8"></div>
                     </div>
                 </div>
             </div>
