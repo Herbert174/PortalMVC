@@ -4,7 +4,12 @@
 
     include "Controller/PortalController.php";
 
-    $categoria = $_GET['categoria'];
+    $id_post     = isset($_SESSION['id_post']) ? $_SESSION['id_post'] : NULL;
+	$id_usuario  = isset($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : NULL;
+	$post        = isset($_SESSION['post']) ? $_SESSION['post'] : NULL;
+	$img_post    = isset($_SESSION['img_post']) ? $_SESSION['img_post'] : NULL;
+	$titulo_post = isset($_SESSION['titulo_post']) ? $_SESSION['titulo_post'] : NULL;
+	$resumo_post = isset($_SESSION['resumo_post']) ? $_SESSION['resumo_post'] : NULL;
 
     $Usuario = new UsuarioController();
     $_SESSION['usuario'] = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
@@ -13,7 +18,52 @@
     $usuario = $RetornoVerLogin[0];
     $img_perfil = $RetornoVerLogin[1];
 
-    $Post = new PostController();
+    if($curtidaPost = $Usuario->VerificaCurtidasPostController())
+        {
+        $curtiuPost = "imagens/curtido.png";
+        $acaoCurtidaPost = "index?Controller=Usuario&Action=AtualizaCurtidaPostController&acao=Descurtir";
+        }else 
+            {
+            $curtiuPost = "imagens/curtir.png";
+            $acaoCurtidaPost = "index?Controller=Usuario&Action=AtualizaCurtidaPostController&acao=Curtir";
+            }
+
+    if($curtidaAutor = $Usuario->VerificaCurtidasAutorPostController())
+        {
+        $curtidaAutor = "imagens/curtido.png";
+        $acaoCurtidaAutor = "index?Controller=Usuario&Action=AtualizaCurtidaAutorController&acao=Descurtir";
+        }else 
+            {
+            $curtidaAutor = "imagens/curtir.png";
+            $acaoCurtidaAutor = "index?Controller=Usuario&Action=AtualizaCurtidaAutorController&acao=Curtir";
+            }
+
+    $Comentario = new ComentarioController();
+    $comentarios = $Comentario->ExibirComentariosController();
+
+    if(isset($_GET['Controller']))
+        {
+        $objeto = $_GET['Controller'];
+        if($objeto == "Comentario")
+            {
+            if(isset($_GET['Action']))
+                {
+                $metodo = $_GET['Action'];
+                //Neste exemplo assim como acima utilizamos o GET para dessa vez passar um método dinamicamente
+                eval("\$Comentario->\$metodo();");
+                }
+            }
+
+        if($objeto == "Usuario")
+            {
+            if(isset($_GET['Action']))
+                {
+                $metodo = $_GET['Action'];
+                //Neste exemplo assim como acima utilizamos o GET para dessa vez passar um método dinamicamente
+                eval("\$Usuario->\$metodo();");
+                }
+            }
+        }
 
 ?>
 
@@ -23,7 +73,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Titulo -->
-        <title>Inicio</title>
+        <title>Pagina de Noticia</title>
         <link rel="icon" href="imagens/AgeOfGamesLogo.jpg">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -141,8 +191,47 @@
         <section class="content">
             <div class="Container">
                 <div class="col-sm-9">
-                    <div id="portal">
-                        <?php echo $Post->PegarPostCategoriaController(); ?>
+                    <div class="row custom">
+                        <div class="page-header texto-capa">
+                            <h1><?= $titulo_post ?></h1>
+                        </div>
+                  
+                        <section class="conteudo">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-12">
+                                            <?= $post ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-12">
+                                            <a href="<?= $acaoCurtidaPost ?>"><img class="img_curtida" src="<?= $curtiuPost ?>"></a>
+                                            <p>Gostou desse post? deixe sua curtida!</p>
+                                            <a href="<?= $acaoCurtidaAutor ?>"><img class="img_curtida" src="<?= $curtidaAutor ?>"></a>
+                                            <p>Já segue o autor desse post?</p>
+                                            <h4>Comentarios:</h4>
+                                            <?= $comentarios ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-10">
+                                            <h4>Enviar comentario</h4>
+                                            <form method="post" action="post?Controller=Comentario&Action=EnviarComentarioController">
+                                                <input type="text" name="comentario" id="texto_comentario" class="form-control" placeholder="Deixe aqui seu comentario" maxlength="140" required>
+                                                <br>
+                                                <input type="submit" class="btn btn_envio" value="Enviar comentario">
+                                            </form>
+                                            <br><br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </div>
                 <div class="col-sm-0"></div>
@@ -150,7 +239,7 @@
                     <div class="row ">
                         <a href="https://discord.gg/Yn3tHJAq" target="_blank"><img class="img_noticia custom" src="imagens/AgeOfGamesLogo.jpg"></a>
                     </div>
-                    <div class="row custom">
+                    <div class="row custom"><br>
                         <ul>
                             <li>Já conhece nosso canal do discord?</li>
                             <li>Deseja fazer parte de uma comunidade apaixonada por jogos e inovações?</li>
@@ -174,7 +263,7 @@
             $(document).ready(function(){
                 $('.nav_btn').click(function(){
                     $('.mobile_nav_items').toggleClass('active');
-                    });
+                    })
                 });
         </script>
 

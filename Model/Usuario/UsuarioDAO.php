@@ -156,11 +156,21 @@
             $objDb = new database();
             $link = $objDb->conecta_mysql();
             
-            $sql = " SELECT * FROM usuarios WHERE nome = '$nome' AND senha = '$senha' ";
+            $sql = " SELECT * FROM usuarios WHERE nome = '$nome' AND senha = '$senha' AND status_usuario != 'Bloqueado' ";
 
             if($Resultado = mysqli_query($link, $sql))
                 {
                 $DadosLogin = mysqli_fetch_array($Resultado);
+                if($DadosLogin['status_usuario'] == 'Habilitado')
+                    {
+                    $_SESSION['credencial'] = $DadosLogin['status_usuario'];
+                    }else unset($_SESSION['credencial']);
+
+                if($DadosLogin['acesso_usuario'] != 'Negado')
+                    {
+                    $_SESSION['credencial_adm'] = $DadosLogin['acesso_usuario'];
+                    }else unset($_SESSION['credencial_adm']);
+                    
                 $_SESSION['img_perfil'] = $DadosLogin['img_perfil'];
                 $_SESSION['id_usuario'] = $DadosLogin['id_usuario'];
                 $_SESSION['usuario']    = $DadosLogin['nome'];
@@ -171,23 +181,187 @@
                     }else
                         {
                         header("Location: login.php?erro=1");
-                        die();
+                        //die();
                         }
-                }
-                    
+                }        
             }
 
         public function DeslogaUsuario() //Desconecta o acesso do usuario no sistema
             {
-            $_SESSION['img_perfil'] = null;
-            $_SESSION['id_usuario'] = null;
-            $_SESSION['usuario']    = null;
-            $_SESSION['email']      = null;
+            // Apaga todas as variáveis da sessão
+            $_SESSION = array();
+
+            // Se é preciso matar a sessão, então os cookies de sessão também devem ser apagados.
+            // Nota: Isto destruirá a sessão, e não apenas os dados!
+            if (ini_get("session.use_cookies")) 
+                {
+                $params = session_get_cookie_params();
+                setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
+                }
+
+            // Por último, destrói a sessão
+            session_destroy();
 
             if($_SESSION['id_usuario'] != null)
                 {
                 return true;
                 } else
+                    return false;
+            }
+
+        public function VerificaAcesso(UsuarioVO $Usuario)
+            {
+            $idUsuario = $Usuario->retornaIdUsuario();
+
+            $objDb = new database();
+            $link = $objDb->conecta_mysql();
+            
+            $sql = " SELECT * FROM usuarios WHERE id_usuario = '$idUsuario' ";
+
+            if($Resultado = mysqli_query($link, $sql))
+                {
+                $DadosLogin = mysqli_fetch_array($Resultado);
+                if($DadosLogin['acesso_usuario'] != 'Negado')
+                    {
+                    return true;
+                    }else return false;
+                }else die ('Falha ao se comunicar com o banco de dados');
+            }
+
+        public function VerificaCurtidasPost(UsuarioVO $Usuario)
+            {
+            $IdUsuario = $Usuario->retornaIdUsuario();
+            $IdPost = $_SESSION['id_post'];
+
+            $objDb = new database();
+            $link = $objDb->conecta_mysql();
+            
+            $sql = " SELECT * FROM lista_curtidas WHERE id_usuario = '$IdUsuario' AND id_post = '$IdPost' ";
+
+            if($Resultado = mysqli_query($link, $sql))
+                {
+                if($Curtida = mysqli_fetch_array($Resultado))
+                    {
+                    return true;
+                    }else return false;
+                }else die ('Falha ao se comunicar com o banco de dados');
+            }
+
+        public function VerificaCurtidasAutorPost(UsuarioVO $Usuario)
+            {
+            $IdUsuario = $Usuario->retornaIdUsuario();
+            $IdPost = $_SESSION['id_post'];
+            $IdAutor = $_SESSION['id_autor_post'];
+
+            $objDb = new database();
+            $link = $objDb->conecta_mysql();
+            
+            $sql = " SELECT * FROM lista_follow WHERE id_usuario = '$IdUsuario' AND id_criador = '$IdAutor' ";
+
+            if($Resultado = mysqli_query($link, $sql))
+                {
+                if($Follow = mysqli_fetch_array($Resultado))
+                    {
+                    return true;
+                    }else return false;
+                }else die ('Falha ao se comunicar com o banco de dados'); 
+            }
+
+        public function AdicionarCurtidaPost()
+            {
+            $IdUsuario = $_SESSION['id_usuario'];
+            $IdPost = $_SESSION['id_post'];
+            $QntdAntigaCurtidas = $_SESSION['qntd_curtidas_post'];
+            $qntdCurtidas = $QntdAntigaCurtidas + 1;
+
+            $objDb = new database();
+            $link = $objDb->conecta_mysql();
+
+            $sql = " INSERT INTO lista_curtidas(id_usuario, id_post) ";
+            $sql .= " values('$IdUsuario', '$IdPost') ";
+
+            if($AddCurtida = mysqli_query($link, $sql))
+                {
+                $sql = " UPDATE post SET qntd_curtidas = '$qntdCurtidas' WHERE id_post = '$IdPost' ";
+                if($AttQntdCurtidas = mysqli_query($link, $sql))
+                    {
+                    return true;
+                    }else
+                        die('Falha ao atualizar qntd curtidas no banco de dados'); 
+                }else
+                    die('Falha ao adicionar sua curtida no banco de dados');      
+            }
+
+        public function RemoverCurtidaPost()
+            {
+            $IdUsuario = $_SESSION['id_usuario'];
+            $IdPost = $_SESSION['id_post'];
+            $QntdAntigaCurtidas = $_SESSION['qntd_curtidas_post'];
+            $qntdCurtidas = $QntdAntigaCurtidas - 1;
+
+            $objDb = new database();
+            $link = $objDb->conecta_mysql();
+
+            $sql = " DELETE FROM lista_curtidas WHERE id_usuario = '$IdUsuario' AND id_post = '$IdPost' ";
+
+            if($RemCurtida = mysqli_query($link, $sql))
+                {
+                $sql = " UPDATE post SET qntd_curtidas = '$qntdCurtidas' WHERE id_post = '$IdPost' ";
+                if($AttQntdCurtidas = mysqli_query($link, $sql))
+                    {
+                    return true;
+                    }else
+                        die('Falha ao atualizar qntd curtidas no banco de dados');
+                }else
+                    return false;
+            }
+
+        public function AdicionarCurtidaAutor()
+            {
+            $IdUsuario = $_SESSION['id_usuario'];
+            $IdAutor = $_SESSION['id_autor_post'];
+            $QntdAntigaCurtidas = $_SESSION['qntd_curtidas_autor'];
+            $qntdCurtidas = $QntdAntigaCurtidas + 1;
+
+            $objDb = new database();
+            $link = $objDb->conecta_mysql();
+
+            $sql = " INSERT INTO lista_follow(id_usuario, id_criador) ";
+            $sql .= " values('$IdUsuario', '$IdAutor') ";
+
+            if($ResultadoRegistro = mysqli_query($link, $sql))
+                {
+                $sql = " UPDATE usuarios SET qntd_curtidas = '$qntdCurtidas' WHERE id_usuario = '$IdAutor' ";
+                if($AttQntdCurtidas = mysqli_query($link, $sql))
+                    {
+                    return true;
+                    }else
+                        die('Falha ao atualizar qntd curtidas no banco de dados');
+                }else
+                    die('Falha ao adicionar sua curtida no banco de dados');      
+            }
+
+        public function RemoverCurtidaAutor()
+            {
+            $IdUsuario = $_SESSION['id_usuario'];
+            $IdAutor = $_SESSION['id_autor_post'];
+            $QntdAntigaCurtidas = $_SESSION['qntd_curtidas_autor'];
+            $qntdCurtidas = $QntdAntigaCurtidas - 1;
+
+            $objDb = new database();
+            $link = $objDb->conecta_mysql();
+
+            $sql = " DELETE FROM lista_follow WHERE id_usuario = '$IdUsuario' AND id_criador = '$IdAutor' ";
+
+            if($Resultado = mysqli_query($link, $sql))
+                {
+                $sql = " UPDATE usuarios SET qntd_curtidas = '$qntdCurtidas' WHERE id_usuario = '$IdAutor' ";
+                if($AttQntdCurtidas = mysqli_query($link, $sql))
+                    {
+                    return true;
+                    }else
+                        die('Falha ao atualizar qntd curtidas no banco de dados');
+                }else
                     return false;
             }
 
@@ -203,6 +377,85 @@
                 $lista = mysqli_fetch_all($resultado_lista, MYSQLI_ASSOC);
                 return $lista;
                 }else 
+                    return false;
+            }
+
+        public function PegarUsuariosFiltro(UsuarioVO $Usuarios) //Realiza consulta com filtro de usuarios
+            {
+            $nomeUsuario = $Usuarios->retornaNomeUsuario();
+            $emailUsuario = $Usuarios->retornaEmailUsuario();
+            $statusUsuario = $Usuarios->retornaStatusUsuario();
+
+            $objDb = new database();
+            $link = $objDb->conecta_mysql();
+
+            $lista = [];
+
+            //----------------------------  Logica do filtro enviado  ---------------------------
+
+            if($nomeUsuario == '' && $emailUsuario == '' && $statusUsuario == '')
+                {
+                $sql = " SELECT * FROM usuarios ";
+                }
+
+            if($nomeUsuario == '' && $emailUsuario == '' && $statusUsuario != '')
+                {
+                $sql = " SELECT * FROM usuarios WHERE status_usuario = '$statusUsuario' ";
+                }
+
+            if($nomeUsuario == '' && $emailUsuario != '' && $statusUsuario == '')
+                {
+                $sql = " SELECT * FROM usuarios WHERE email = '$emailUsuario' ";
+                }
+
+            if($nomeUsuario == '' && $emailUsuario != '' && $statusUsuario != '')
+                {
+                $sql = " SELECT * FROM usuarios WHERE email = '$emailUsuario' and status_usuario = '$statusUsuario' ";
+                }
+
+            if($nomeUsuario != '' && $emailUsuario == '' && $statusUsuario == '')
+                {
+                $sql = " SELECT * FROM usuarios WHERE id_usuario = '$nomeUsuario' ";
+                }
+
+            if($nomeUsuario != '' && $emailUsuario == '' && $statusUsuario != '')
+                {
+                $sql = " SELECT * FROM usuarios WHERE id_usuario = '$nomeUsuario' and status_usuario = '$statusUsuario' ";
+                }
+
+            if($nomeUsuario != '' && $emailUsuario != '' && $statusUsuario == '')
+                {
+                $sql = " SELECT * FROM usuarios WHERE id_usuario = '$nomeUsuario' and email = '$emailUsuario' ";
+                }
+
+            if($nomeUsuario != '' && $emailUsuario != '' && $statusUsuario != '')
+                {
+                $sql = " SELECT * FROM usuarios WHERE id_usuario = '$nomeUsuario' and email = '$emailUsuario' and status_usuario = '$statusUsuario' ";
+                }
+
+            if($resultado_lista = mysqli_query($link, $sql))
+                {
+                $lista = mysqli_fetch_all($resultado_lista, MYSQLI_ASSOC);
+                return $lista;
+                }else
+                    return false;
+
+            }
+
+        public function AtualizarStatusUsuario(UsuarioVO $Usuario) //Atualiza status de usuario
+            {
+            $id_usuario = $Usuario->retornaIdUsuario();
+            $status_usuario = $Usuario->retornaStatusUsuario();
+
+            $sql = " UPDATE usuarios SET status_usuario = '$status_usuario' WHERE id_usuario = '$id_usuario' ";
+
+            $objDb = new database();
+            $link = $objDb -> conecta_mysql();
+
+            if($resultado_post = mysqli_query($link, $sql))
+                {
+                return true;
+                } else 
                     return false;
             }
         

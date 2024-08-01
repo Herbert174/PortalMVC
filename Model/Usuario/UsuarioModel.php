@@ -62,18 +62,88 @@
                     {
                     }
                     else{
-                        $Usuario->defineImgUsuario('imagens/logo.png');
+                        $Usuario->defineImgUsuario('imagens/AgeOfGamesLogo.jpg');
                         }
                 }else{
                      $Usuario->defineNomeUsuario('Faça o seu login e aproveite');
-                     $Usuario->defineImgUsuario('imagens/logo.png');
+                     $Usuario->defineImgUsuario('imagens/AgeOfGamesLogo.jpg');
                      }
+            }
+
+        public function VerificaAcessoModel(UsuarioVO $Usuario)
+            {
+            $usuario = new UsuarioDAO();
+            return $usuario->VerificaAcesso($Usuario);
+            }
+
+        public function VerificaCurtidasPostModel(UsuarioVO $Usuario)
+            {
+            $usuario = new UsuarioDAO();
+            return $usuario->VerificaCurtidasPost($Usuario);
+            }
+
+        public function VerificaCurtidasAutorPostModel(UsuarioVO $Usuario)
+            {
+            $usuario = new UsuarioDAO();
+            return $usuario->VerificaCurtidasAutorPost($Usuario);
+            }
+
+        public function AtualizaCurtidaPostModel($Acao)
+            {
+            $usuario = new UsuarioDAO();
+            if($Acao == 'Curtir')
+                {
+                return $usuario->AdicionarCurtidaPost();
+                }
+            if($Acao == 'Descurtir')
+                {
+                return $usuario->RemoverCurtidaPost();
+                }
+            }
+
+        public function AtualizaCurtidaAutorModel($Acao)
+            {
+            $usuario = new UsuarioDAO();
+            if($Acao == 'Curtir')
+                {
+                return $usuario->AdicionarCurtidaAutor();
+                }
+            if($Acao == 'Descurtir')
+                {
+                return $usuario->RemoverCurtidaAutor();
+                }
             }
 
         public function GetAllUsuariosModel()
             {
             $usuarios = new UsuarioDAO();
             return $usuarios->GetAllUsuarios();
+            }
+
+        public function PegarUsuariosFiltroModel(UsuarioVO $Usuarios)
+            {
+            $usuarios = new UsuarioDAO();
+            return $usuarios->PegarUsuariosFiltro($Usuarios);
+            }
+
+        public function AtualizaStatusUsuarioModel(UsuarioVO $Usuario)
+            {
+            $usuario = new UsuarioDAO();
+            $status = $Usuario->retornaStatusUsuario();
+            if($_SESSION['credencial_adm'] == 'Gestor')
+                {
+                if($status == 'Habilitado')
+                    {
+                    $_SESSION['credencial'] = 'Habilitado';
+                    }else unset($_SESSION['credencial']);
+                return $usuario->AtualizarStatusUsuario($Usuario);
+                } else 
+                    {
+                    if($status == 'Habilitado')
+                        {
+                        return true;
+                        } else return $usuario->AtualizarStatusUsuario($Usuario);
+                    }
             }
         }
 

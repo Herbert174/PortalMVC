@@ -7,6 +7,8 @@
         private $EmailUsuario;
         private $SenhaUsuario;
         private $ImgUsuario;
+        private $StatusUsuario;
+        private $AcessoUsuario;
 
         public function retornaIdUsuario()
             {
@@ -56,6 +58,26 @@
         public function defineImgUsuario($ImgEnviado)
             {
             $this->ImgUsuario = $ImgEnviado;
+            }
+
+        public function retornaStatusUsuario()
+            {
+            return $this->StatusUsuario;
+            }
+
+        public function defineStatusUsuario($StatusUsuarioEnviado)
+            {
+            $this->StatusUsuario = $StatusUsuarioEnviado;
+            }
+
+        public function retornaAcessoUsuario()
+            {
+            return $this->AcessoUsuario;
+            }
+
+        public function defineAcessoUsuario($AcessoUsuarioEnviado)
+            {
+            $this->AcessoUsuario = $AcessoUsuarioEnviado;
             }
         }
 

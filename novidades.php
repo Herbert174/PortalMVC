@@ -2,14 +2,7 @@
 
     session_start();
 
-    include "Controller/PortalController.php";
-
-    $id_post     = isset($_SESSION['id_post']) ? $_SESSION['id_post'] : NULL;
-	$id_usuario  = isset($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : NULL;
-	$post        = isset($_SESSION['post']) ? $_SESSION['post'] : NULL;
-	$img_post    = isset($_SESSION['img_post']) ? $_SESSION['img_post'] : NULL;
-	$titulo_post = isset($_SESSION['titulo_post']) ? $_SESSION['titulo_post'] : NULL;
-	$resumo_post = isset($_SESSION['resumo_post']) ? $_SESSION['resumo_post'] : NULL;
+    include_once "Controller/PortalController.php";
 
     $Usuario = new UsuarioController();
     $_SESSION['usuario'] = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
@@ -18,6 +11,7 @@
     $usuario = $RetornoVerLogin[0];
     $img_perfil = $RetornoVerLogin[1];
 
+    $Post = new PostController();
 ?>
 
 <!DOCTYPE html>
@@ -26,8 +20,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Titulo -->
-        <title>Pagina de Noticia</title>
-        <link rel="icon" href="imagens/logo.png">
+        <title>Inicio</title>
+        <link rel="icon" href="imagens/AgeOfGamesLogo.jpg">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
@@ -64,13 +58,13 @@
                 <i class="fas fa-bars" id="sidebar_btn"></i>
             </label>
             <div class="left_area">
-                <h3>Coding <span>Snow</span></h3>
+                <h3>Age Of <span>Games</span></h3>
             </div>
             <div class="right_area">
-                <a href="login.php" class="logout_btn">Login</a>
+                <a href="login" class="logout_btn">Login</a>
             </div>
             <div class="right_area">
-                <a href="cadastrar.php" class="logout_btn">Cadastro</a>
+                <a href="cadastrar" class="logout_btn">Cadastro</a>
             </div>
         </header>
         <!-- Header area end -->
@@ -78,16 +72,16 @@
         <!-- Mobile navigation bar start -->
         <div class="mobile_nav">
             <div class="nav_bar">
-                <a href="pagina_usuario.html"><img src="imagens/perfil.jpg" class="mobile_profile_image" alt=""></a>
+                <a href="pagina_usuario"><img src="<?= $img_perfil ?>" class="mobile_profile_image" alt=""></a>
                 <i class="fa fa-bars nav_btn"></i>
             </div>
             <div class="mobile_nav_items">
-                <a href="index.php"><i class="fas fa-desktop"></i><span>Inicio</span></a>
+                <a href="index"><i class="fas fa-desktop"></i><span>Inicio</span></a>
                 <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Configure seu perfil</span></a>
-                <a href="categorias.php"><i class="fas fa-table"></i><span>Categorias</span></a>
+                <a href="categorias"><i class="fas fa-table"></i><span>Categorias</span></a>
                 <a href="#"><i class="fas fa-th"></i><span>Novidades</span></a>
-                <a href="#"><i class="fas fa-info-circle"></i><span>Deslogar</span></a>
-                <a href="#"><i class="fas fa-sliders-h"></i><span>Painel Digievolução</span></a>
+                <a href="index?Controller=Usuario&Action=VerificaAcessoController&Painel=Geral"><i class="fas fa-info-circle"></i><span>Deslogar</span></a>
+                <a href="PainelDigievolucao"><i class="fas fa-sliders-h"></i><span>Painel Digievolução</span></a>
             </div>
         </div>
         <!-- Mobile navigation bar end -->
@@ -95,15 +89,15 @@
         <!-- Sidebar start -->
         <div class="sidebar">
             <div class="profile_info">
-                <a class="link_foto" href="pagina_usuario.php"><img src="<?= $img_perfil ?>" class="profile_image" alt=""></a>
+                <a class="link_foto" href="pagina_usuario"><img src="<?= $img_perfil ?>" class="profile_image" alt=""></a>
                 <h4><?= $usuario ?></h4>
             </div>
-            <a href="index.php"><i class="fas fa-desktop"></i><span>Inicio</span></a>
+            <a href="index"><i class="fas fa-desktop"></i><span>Inicio</span></a>
             <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Configure seu perfil</span></a>
-            <a href="categorias.php"><i class="fas fa-table"></i><span>Categorias</span></a>
+            <a href="categorias"><i class="fas fa-table"></i><span>Categorias</span></a>
             <a href="#"><i class="fas fa-th"></i><span>Novidades</span></a>
-            <a href="#"><i class="fas fa-info-circle"></i><span>Deslogar</span></a>
-            <a href="#"><i class="fas fa-sliders-h"></i><span>Painel Digievolução</span></a>
+            <a href="index?Controller=Usuario&Action=VerificaAcessoController&Painel=Geral"><i class="fas fa-info-circle"></i><span>Deslogar</span></a>
+            <a href="PainelDigievolucao"><i class="fas fa-sliders-h"></i><span>Painel Digievolução</span></a>
         </div>
         <!-- Sidebar end -->
 
@@ -123,10 +117,10 @@
                             <div class="profile_info">
                                 <img src="<?= $img_perfil ?>" class="link_foto margin_custom" alt="">
                                 <h2><?= $usuario ?></h2>
-                                <form method="post" action="index.php?Controller=Usuario&Action=AtualizaUsuarioController" id="formPost" enctype="multipart/form-data">
-                                    <input type="text" class="input_custom" value="" id="nome" name="nome" placeholder="Insira um nome de usúario" maxlength="50"/><br><br>
+                                <form method="post" action="index?Controller=Usuario&Action=AtualizaUsuarioController" id="formPost" enctype="multipart/form-data">
+                                    <input type="text" class="input_custom" value="" id="nome" name="nome" placeholder="Insira um novo nome de usúario" maxlength="50"/><br><br>
                                     <p>Escolha uma imagem para substituir a do seu perfil</p>
-                                    <input type="hidden" name="MAX_FILE_SIZE" value="99999999"/><input class="form-control input_custom" id="imagem" name="imagem" type="file"/><br>
+                                    <input type="hidden" name="MAX_FILE_SIZE" value="99999999"/><input class="form-control input_custom" id="imgPerfil" name="imgPerfil" type="file"/><br>
                                     <input type="submit" class="btn btn_envio input_custom" value="Enviar">
                                 </form>
                             </div>
@@ -144,28 +138,22 @@
         <section class="content">
             <div class="Container">
                 <div class="col-sm-9">
-                    <div class="row custom">
-                        <div class="page-header texto-capa">
-                            <h1><?= $titulo_post ?></h1>
-                        </div>
-                  
-                        <section class="conteudo">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="col-md-12">
-                                            <?= $post ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
+                    <div id="portal">
+                        <?php echo $Post->PegarAllPostController(); ?>
                     </div>
                 </div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-2">
-                    <div class="row custom">
-                        <img class="img_noticia" src="imagens/logo.png">
+                <div class="col-sm-0"></div>
+                <div class="col-sm-3 areaDivulgacao">
+                    <div class="row ">
+                        <a href="https://discord.gg/Yn3tHJAq" target="_blank"><img class="img_noticia custom" src="imagens/AgeOfGamesLogo.jpg"></a>
+                    </div>
+                    <div class="row custom"><br>
+                        <ul>
+                            <li>Já conhece nosso canal do discord?</li>
+                            <li>Deseja fazer parte de uma comunidade apaixonada por jogos e inovações?</li>
+                            <li>Gosta dos principais classicos da nossa infância?</li>
+                            <li>Se as respostas forem sim você veio ao lugar certo!</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -183,7 +171,7 @@
             $(document).ready(function(){
                 $('.nav_btn').click(function(){
                     $('.mobile_nav_items').toggleClass('active');
-                    })
+                    });
                 });
         </script>
 

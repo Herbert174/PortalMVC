@@ -11,6 +11,8 @@
     $usuario = $RetornoVerLogin[0];
     $img_perfil = $RetornoVerLogin[1];
 
+    $CriadorPost = isset($_SESSION['credencial']) ? '' : 'visibility: hidden';
+
     $Post = new PostController();
 ?>
 
@@ -21,7 +23,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Titulo -->
         <title>Pagina do Usuário</title>
-        <link rel="icon" href="imagens/logo.png">
+        <link rel="icon" href="imagens/AgeOfGamesLogo.jpg">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
@@ -52,6 +54,10 @@
                           $('#modal-perfil').modal();
                           });
                     })
+
+                $(function () {
+                    $('[data-toggle="tooltip"]').tooltip()
+                    })
                 });
         </script>
     </head>
@@ -65,13 +71,13 @@
                 <i class="fas fa-bars" id="sidebar_btn"></i>
             </label>
             <div class="left_area">
-                <h3>Coding <span>Snow</span></h3>
+                <h3>Age Of <span>Games</span></h3>
             </div>
             <div class="right_area">
-                <a href="login.php" class="logout_btn">Login</a>
+                <a href="login" class="logout_btn">Login</a>
             </div>
             <div class="right_area">
-                <a href="cadastrar.php" class="logout_btn">Cadastro</a>
+                <a href="cadastrar" class="logout_btn">Cadastro</a>
             </div>
         </header>
         <!-- Header area end -->
@@ -79,16 +85,16 @@
         <!-- Mobile navigation bar start -->
         <div class="mobile_nav">
             <div class="nav_bar">
-                <a href="#"><img src="imagens/perfil.jpg" class="mobile_profile_image" alt=""></a>
+                <a href="#"><img src="<?= $img_perfil ?>" class="mobile_profile_image" alt=""></a>
                 <i class="fa fa-bars nav_btn"></i>
             </div>
             <div class="mobile_nav_items">
-                <a href="index.php"><i class="fas fa-desktop"></i><span>Inicio</span></a>
+                <a href="index"><i class="fas fa-desktop"></i><span>Inicio</span></a>
                 <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Configure seu perfil</span></a>
-                <a href="categorias.php"><i class="fas fa-table"></i><span>Categorias</span></a>
-                <a href="#"><i class="fas fa-th"></i><span>Novidades</span></a>
+                <a href="categorias"><i class="fas fa-table"></i><span>Categorias</span></a>
+                <a href="novidades"><i class="fas fa-th"></i><span>Novidades</span></a>
                 <a href="#"><i class="fas fa-info-circle"></i><span>Deslogar</span></a>
-                <a href="PainelDigievolucao.php"><i class="fas fa-sliders-h"></i><span>Painel Digievolução</span></a>
+                <a href="PainelDigievolucao"><i class="fas fa-sliders-h"></i><span>Painel Digievolução</span></a>
             </div>
         </div>
         <!-- Mobile navigation bar end -->
@@ -96,15 +102,15 @@
         <!-- Sidebar start -->
         <div class="sidebar">
             <div class="profile_info">
-                <a class="link_foto" href="pagina_usuario.php"><img src="<?= $img_perfil ?>" class="profile_image" alt=""></a>
+                <a class="link_foto" href="pagina_usuario"><img src="<?= $img_perfil ?>" class="profile_image" alt=""></a>
                 <h4><?= $usuario ?></h4>
             </div>
-            <a href="index.php"><i class="fas fa-desktop"></i><span>Inicio</span></a>
+            <a href="index"><i class="fas fa-desktop"></i><span>Inicio</span></a>
             <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Configure seu perfil</span></a>
-            <a href="categorias.php"><i class="fas fa-table"></i><span>Categorias</span></a>
-            <a href="#"><i class="fas fa-th"></i><span>Novidades</span></a>
+            <a href="categorias"><i class="fas fa-table"></i><span>Categorias</span></a>
+            <a href="novidades"><i class="fas fa-th"></i><span>Novidades</span></a>
             <a href="#"><i class="fas fa-info-circle"></i><span>Deslogar</span></a>
-            <a href="PainelDigievolucao.php"><i class="fas fa-sliders-h"></i><span>Painel Digievolução</span></a>
+            <a href="PainelDigievolucao"><i class="fas fa-sliders-h"></i><span>Painel Digievolução</span></a>
         </div>
         <!-- Sidebar end -->
 
@@ -119,7 +125,7 @@
                   <div class="container">
                     <div class="row">
                         <div class="col-md-6">
-                            <form method="post" action="index.php?Controller=Post&Action=EnviarPostController" id="formPost" enctype="multipart/form-data">
+                            <form method="post" action="index?Controller=Post&Action=EnviarPostController" id="formPost" enctype="multipart/form-data">
                                 <div class="container">
                                     <select class="form-control select_custom" id="tipoInput">
                                         <option value="1">Titulo</option>
@@ -128,7 +134,7 @@
                                         <option value="4">Imagem de capa</option>
                                     </select>
                                     <br/>
-                                    <a class="btn btn-primary select_custom" href="javascript:void(0)" id="addInput">
+                                    <a class="btn btn_envio select_custom" href="javascript:void(0)" id="addInput">
                                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         Adicionar Campo
                                     </a>
@@ -138,10 +144,16 @@
                                             <input type="text" id="post[1]" name="post[1]" size="47" value="" placeholder="Adicione um titulo" maxlength="50" required/><br><br>
                                         </p>
                                         <p>
-                                        <textarea id="post[2]" name="post[2]" rows="5" cols="45" placeholder="Adicione um resumo" minlength="50" required></textarea><br><br>
+                                        <textarea id="post[2]" name="post[2]" rows="5" cols="45" placeholder="Adicione um resumo" minlength="50" maxlength="180" required></textarea><br><br>
                                         </p>
                                     </div>
-                                    <input type="submit" class="btn btn-primary" value="Enviar">
+                                    <select class="form-control select_custom" name="categoria" id="categoria" required>
+                                        <option value="">Selecione uma categoria</option>
+                                        <option value="Jogos">Jogos</option>
+                                        <option value="Novidades">Novidades</option>
+                                        <option value="Curiosidades">Curiosidades</option>
+                                    </select><br>
+                                    <input type="submit" class="btn btn_envio" value="Enviar">
 
                                     <script>
                                     $(function () {
@@ -243,7 +255,7 @@
                             <div class="profile_info">
                                 <img src="<?= $img_perfil ?>" class="link_foto margin_custom" alt="">
                                 <h2><?= $usuario ?></h2>
-                                <form method="post" action="index.php?Controller=Usuario&Action=AtualizaUsuarioController" id="formPost" enctype="multipart/form-data">
+                                <form method="post" action="index?Controller=Usuario&Action=AtualizaUsuarioController" id="formPost" enctype="multipart/form-data">
                                     <input type="text" class="input_custom" value="" id="nome" name="nome" placeholder="Insira um nome de usúario" maxlength="50"/><br><br>
                                     <p>Escolha uma imagem para substituir a do seu perfil</p>
                                     <input type="hidden" name="MAX_FILE_SIZE" value="99999999"/><input class="form-control input_custom" id="imagem" name="imagem" type="file"/><br>
@@ -264,22 +276,35 @@
         <section class="content">
             <div class="Container">
                 <div class="col-sm-9">
-                    <div class="row custom1">
+                    <div class="row custom1" <?= $CriadorPost ?>>
                         <div class="col-sm-12">
                             <input type="text" class="form-control form_custom" placeholder="Poste aqui" id="post" data-toggle="modal" data-target="#modal-post">
-                            <button class="btn btn-outline-secondary button_custom" type="button">Enviar Post</button>
+                            <button class="btn btn-outline-secondary button_custom" data-toggle="tooltip" data-placement="left" title="Enviar Post" type="button">Enviar Post</button>
                         </div>
                     </div>
-                    <div id="portal">
-                        <?php echo $Post->PegarAllPostController(); ?>
+                    <div id="meus_posts" <?= $CriadorPost ?>>
+                        <h2 class="branco">Meus Posts</h2>
+                        <?php echo $Post->PegarMeusPostController(); ?>
+                        
+                        <h2 class="branco">Posts Sugeridos</h2>
+                    </div>
+                    <div id="posts_geral">
+                        <?php echo $Post->PegarMeusPostsSugeridosController(); ?>
                     </div>
                 </div>
 
-                <div class="col-sm-1"></div>
-
-                <div class="col-sm-2">
-                    <div class="row custom">
-                        <img class="img_noticia" src="imagens/logo.png">
+                <div class="col-sm-0"></div>
+                <div class="col-sm-3 areaDivulgacao">
+                    <div class="row ">
+                        <a href="https://discord.gg/Yn3tHJAq" target="_blank"><img class="img_noticia custom" src="imagens/AgeOfGamesLogo.jpg"></a>
+                    </div>
+                    <div class="row custom"><br>
+                        <ul>
+                            <li>Já conhece nosso canal do discord?</li>
+                            <li>Deseja fazer parte de uma comunidade apaixonada por jogos e inovações?</li>
+                            <li>Gosta dos principais classicos da nossa infância?</li>
+                            <li>Se as respostas forem sim você veio ao lugar certo!</li>
+                        </ul>
                     </div>
                 </div>
 
@@ -291,8 +316,8 @@
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="bootstrap/js/bootstrap.min.js"></script>
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
 
         <script type="text/javascript">
             $(document).ready(function()
@@ -313,6 +338,11 @@
                     }
                 postarpost();
                 });
+
+                $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+        $('[data-toggle="popover"]').popover()
+        })
         </script>
 
     </body>

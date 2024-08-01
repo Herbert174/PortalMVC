@@ -1268,7 +1268,7 @@ Digimon =
                 {
                 var RequisitoHP;
                 if(this.ReqHP[d] != null)
-                    {RequisitoHP = "<a data-toggle='tooltip' title="+this.ReqHP[d]+"><img src='Sprites/hp.png' width='32' ></a>"}else RequisitoHP = "";
+                    {RequisitoHP = "<img title="+this.ReqHP[d]+" src='Sprites/hp.png' width='32' >"}else RequisitoHP = "";
                 var RequisitoMP;
                 if(this.ReqMP[d] != null)
                     {RequisitoMP = "<img src='Sprites/mp.png' width='32' title="+this.ReqMP[d]+">"}else RequisitoMP = "";

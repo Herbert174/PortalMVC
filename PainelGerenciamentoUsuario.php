@@ -15,15 +15,17 @@
         {}
         else {header("Location: index");}
 
-    $Post = new PostController();
-    $Comentario = new ComentarioController();
+    $selectUsuarios = $Usuario->ExibirSelectUsuariosController();
+    $selectEmails = $Usuario->ExibirSelectEmailController();
 
-    $posts = $Post->AllPostController();
-    $usuarios = $Usuario->GetAllUsuariosController();
-    $comentarios = $Comentario->RecuperarQntdComentariosController();
-    $nUsuarios = count($usuarios);
-    $nPosts = count($posts);
-    $nComentarios = count($comentarios);
+    if(isset($_GET['usuario']))
+        {
+        $AdmUsuarios = $Usuario->ExibirAdmUsuarioFiltroController();
+        }else 
+            {
+            $AdmUsuarios = $Usuario->ExibirAdmAllUsuariosController();
+            }
+
 ?>
 
 <!DOCTYPE html>
@@ -88,12 +90,12 @@
                 <i class="fa fa-bars nav_btn"></i>
             </div>
             <div class="mobile_nav_items">
-                <a href="#"><i class="fas fa-desktop"></i><span>Inicio Painel</span></a>
+                <a href="index?Controller=Usuario&Action=VerificaAcessoController&Painel=Geral"><i class="fas fa-desktop"></i><span>Inicio Painel</span></a>
                 <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Configure seu perfil</span></a>
                 <a href="index?Controller=Usuario&Action=VerificaAcessoController&Painel=Post"><i class="fas fa-table"></i><span>Gerenciar Post</span></a>
-                <a href="index?Controller=Usuario&Action=VerificaAcessoController&Painel=Usuario"><i class="fas fa-th"></i><span>Gerenciar Usuarios</span></a>
+                <a href="#"><i class="fas fa-th"></i><span>Gerenciar Usuarios</span></a>
                 <a href="index?Controller=Usuario&Action=VerificaAcessoController&Painel=Comentario"><i class="fas fa-sliders-h"></i><span>Gerenciar Comentarios</span></a>
-                <a href="index.php"><i class="fas fa-info-circle"></i><span>Voltar</span></a>
+                <a href="index"><i class="fas fa-info-circle"></i><span>Voltar</span></a>
             </div>
         </div>
         <!-- Mobile navigation bar end -->
@@ -104,10 +106,10 @@
                 <a class="link_foto" href="pagina_usuario"><img src="<?= $img_perfil ?>" class="profile_image" alt=""></a>
                 <h4><?= $usuario ?></h4>
             </div>
-            <a href="#"><i class="fas fa-desktop"></i><span>Inicio Painel</span></a>
+            <a href="index?Controller=Usuario&Action=VerificaAcessoController&Painel=Geral"><i class="fas fa-desktop"></i><span>Inicio Painel</span></a>
             <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Configure seu perfil</span></a>
             <a href="index?Controller=Usuario&Action=VerificaAcessoController&Painel=Post"><i class="fas fa-table"></i><span>Gerenciar Post</span></a>
-            <a href="index?Controller=Usuario&Action=VerificaAcessoController&Painel=Usuario"><i class="fas fa-th"></i><span>Gerenciar Usuarios</span></a>
+            <a href="#"><i class="fas fa-th"></i><span>Gerenciar Usuarios</span></a>
             <a href="index?Controller=Usuario&Action=VerificaAcessoController&Painel=Comentario"><i class="fas fa-sliders-h"></i><span>Gerenciar Comentarios</span></a>
             <a href="index"><i class="fas fa-info-circle"></i><span>Voltar</span></a>
         </div>
@@ -151,32 +153,38 @@
             <div class="Container">
                 <div class="col-sm-12">
                     <div class="row custom">
-                        <h2 class="centro">Visão geral</h2>
-                        <div class="col-sm-4">
-                            <ul class="list-group">
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Qntd de Usuarios total
-                                    <span class="badge badge-primary badge-pill"><?= $nUsuarios; ?></span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Qntd de Posts total
-                                    <span class="badge badge-primary badge-pill"><?= $nPosts; ?></span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Qntd de Comentarios total
-                                    <span class="badge badge-primary badge-pill"><?= $nComentarios; ?></span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Qntd de denuncias avaliadas total
-                                    <span class="badge badge-primary badge-pill">1</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Qntd de denuncias não vistas total
-                                    <span class="badge badge-primary badge-pill">1</span>
-                                </li>
-                            </ul>
+                        <h2 class="centro">Visão geral Usuarios</h2>
+                        <div class="col-sm-3">
+                            <h4>Filtro(s)</h4>
+                            <form method="GET" action="PainelGerenciamentoUsuario">
+                            <select class="form-control" name="usuario">
+                                <option value="">Selecione um usuario</option>
+                                <?php echo $selectUsuarios ?>
+                            </select><br>
+
+                            <select class="form-control" name="email">
+                                <option value="">Selecione um email</option>
+                                <?php echo $selectEmails ?>
+                            </select><br>
+
+                            <select class="form-control" name="status">
+                                <option value="">Selecione um status</option>
+                                <option value="Habilitado">Habilitado</option>
+                                <option value="Suspenso">Suspenso</option>
+                                <option value="Bloqueado">Bloqueado</option>
+                            </select><br>
+                            <input type="submit" class="btn btn_envio" value="Realizar filtro"><br>
+                            </form>
+                            <br>
+                            <a href="PainelGerenciamentoUsuario"><input type="button" class="btn btn_envio" value="Limpar filtro"></a><br><br>
                         </div>
-                        <div class="col-sm-8"></div>
+
+                        <div class="col-sm-9">
+                            <h4>Usuarios</h4>
+                            <div id="UsuariosGerenciamento">
+                                <?php echo $AdmUsuarios;  ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

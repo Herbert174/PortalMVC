@@ -3,7 +3,10 @@ body{
 	margin: 0;
 	padding: 0;
 	font-family: "Roboto", sans-serif;
-	background: url(imagens/background1.png);
+	background: url(imagens/background.png) no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
 	}
 
 header{
@@ -26,12 +29,12 @@ header{
 	}
 
 .left_area span{
-		color: #ED3907;
+		color: #d10700;
 		}
 
 .logout_btn{
 	padding: 5px;
-	background: #ED3907;
+	background: #d10700;
 	text-decoration: none;
 	float: right;
 	margin-top: -27px;
@@ -45,7 +48,7 @@ header{
 	}
 
 .logout_btn:hover{
-	background: #D93103;
+	background: #d10700;
 	}
 
 .sidebar{
@@ -96,7 +99,7 @@ header{
 	}
 
 .sidebar a:hover{
-	background: #ED3907;
+	background: #d10700;
 	}
 
 .sidebar i{
@@ -116,7 +119,7 @@ label #sidebar_btn{
 	}
 
 label #sidebar_btn:hover{
-	color: #ED3907;
+	color: #d10700;
 	}
 
 #check:checked ~ .sidebar{
@@ -138,10 +141,11 @@ label #sidebar_btn:hover{
 	margin-top: 60px;
 	padding: 20px;
 	margin-left: 250px;
-	background: url(imagens/background1.png) no-repeat;
+	/*background: url(imagens/background1.png) no-repeat;
+	 background-attachment: fixed; 
 	background-position: center;
 	background-size: cover;
-	height: 100vh;
+	height: 100vh;*/
 	transition: 0.5s;
 	}
 
@@ -214,7 +218,7 @@ label #sidebar_btn:hover{
 		}
 
 	.nav_bar .nav_btn:hover{
-		color: #ED3907;
+		color: #d10700;
 		}
 
 	.mobile_nav_items{
@@ -235,7 +239,7 @@ label #sidebar_btn:hover{
 		}
 
 	.mobile_nav_items a:hover{
-		background: #ED3907;
+		background: #d10700;
 		}
 
 	.mobile_nav_items i{
@@ -245,12 +249,12 @@ label #sidebar_btn:hover{
 	.active{
 		display: block;
 		}
-
 	}
 
 /* ------------------- Layout ----------------------- */
 .div_esquerda{float: left;}
 .div_direita{float: right;}
+.link_direita{float: right; margin-right: 10px;}
 /* -------------- Barra de Navegação ---------------- */
 /*.logo {height: 40px; width: 50px; margin-top: 5px;}*/
 .link_foto
@@ -276,23 +280,29 @@ label #sidebar_btn:hover{
 /* --------------------- Botões --------------------- */
 .btn_cadastro{
 	padding: 5px;
-	background: #ED3907;
+	background: #d10700;
 	text-decoration: none;
 	border-radius: 5px;
 	font-size: 15px;
 	font-weight: 600;
 	color: white;
 	}
-.btn_envio{background: #ED3907; color: white;}
+.btn_envio{background: #d10700; color: white;}
+.btn_arquivar{background: #d10700; color: white;}
 
 /* ---------------- Seção conteudo ------------------ */
 .custom{background: white; color: black; opacity: 0.8; margin-bottom: 10px;}
 .custom1{background: white; color: black; opacity: 0.8; margin-bottom: 10px; border-radius: 10px;}
 .custom2{background: white; color: black; margin-bottom: 10px; border-radius: 10px;}
-.img_postagem{height: 100px; width: 100%; position: center;}
+.img_postagem{height: 110px; width: 100%; position: center;}
 .img_postagem1{display: block; margin-left: auto; margin-right: auto;}
 .img_postagem2{height: 200px; width: 250px;}
-.img_noticia{height: 150px; width: 100%;}
+.img_postagemAdm{height: 50px; width: 60px; position: center; border-radius: 100px;}
+.img_comentario{height: 70px; width: 70px; border-radius: 70px; margin-left: 20%}
+.img_curtida{height: 30px; width: 30px;}
+.img_curtida_comentario{height: 30px; width: 30px; float: right;}
+.span_postagemAdm{position: center;}
+.img_noticia{height: 230px; width: 100%;}
 .borda{border-style: solid;}
 .texto-capa{text-align: center; vertical-align: center;}
 .form_custom{margin-top: 5px;}
@@ -304,6 +314,7 @@ label #sidebar_btn:hover{
 .modal_custom p{color: white;}
 .input_direita{float: right;}
 .select_PainelDig{padding-left: 30px; background: url(Sprites/Birdramon.gif) no-repeat; background-position: left 7px top 7px;}
+.areaDivulgacao{padding-left: 30px;}
 /* ----------------- Seção rodapé ------------------- */
 
 
@@ -311,11 +322,31 @@ label #sidebar_btn:hover{
 .negrito{font-weight: bold;}
 .centro{text-align: center;}
 .direita{text-align: right;}
+.esquerda{text-align: left;}
+.branco{color: white;}
 /* ----------------- Media Queries ------------------ */
 /* XS <768 */
-/*@media screen and (max-width: 992px)
+@media screen and (max-width: 767px)
 	{
-	.img-custom{height: 350px;}
-	.img-custom1{height: 300px;}
-	}*/
+	.img_postagem{height: 410px;}
+	.img_noticia{height: 410px;}
+	}
+
+@media screen and (min-width: 768px)
+	{
+	.img_postagem{height: 70px;}
+	.img_noticia{height: 140px;}
+	}
+
+@media screen and (min-width: 992px)
+	{
+	.img_postagem{height: 80px;}
+	.img_noticia{height: 180px;}
+	}
+
+@media screen and (min-width: 1200px)
+	{
+	.img_postagem{height: 110px;}
+	.img_noticia{height: 230px;}
+	}
 /* Fim Media queries */

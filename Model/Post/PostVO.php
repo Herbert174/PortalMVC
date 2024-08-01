@@ -9,6 +9,8 @@
         private $ResumoPost;
         private $UsuarioPost;
         private $CategoriaPost;
+        private $StatusPost;
+        private $DataPost;
 
         public function retornaIdPost()
             {
@@ -78,6 +80,26 @@
         public function defineCategoriaPost($CategoriaPostEnviado)
             {
             $this->CategoriaPost = $CategoriaPostEnviado;
+            }
+
+        public function retornaStatusPost()
+            {
+            return $this->StatusPost;
+            }
+
+        public function defineStatusPost($StatusPostEnviado)
+            {
+            $this->StatusPost = $StatusPostEnviado;
+            }
+
+        public function retornaDataPost()
+            {
+            return $this->DataPost;
+            }
+
+        public function defineDataPost($DataPostEnviado)
+            {
+            $this->DataPost = $DataPostEnviado;
             }
         }
 
