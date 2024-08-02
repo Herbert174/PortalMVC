@@ -291,7 +291,7 @@ label #sidebar_btn:hover{
 .btn_arquivar{background: #d10700; color: white;}
 
 /* ---------------- Seção conteudo ------------------ */
-.custom{background: white; color: black; opacity: 0.8; margin-bottom: 10px;}
+.custom{background: white; color: black; opacity: 0.9; margin-bottom: 10px;}
 .custom1{background: white; color: black; opacity: 0.8; margin-bottom: 10px; border-radius: 10px;}
 .custom2{background: white; color: black; margin-bottom: 10px; border-radius: 10px;}
 .img_postagem{height: 110px; width: 100%; position: center;}
@@ -313,6 +313,7 @@ label #sidebar_btn:hover{
 .modal_custom form{color: black;}
 .modal_custom p{color: white;}
 .input_direita{float: right;}
+.span_direita{float: right; margin-top: 5px;}
 .select_PainelDig{padding-left: 30px; background: url(Sprites/Birdramon.gif) no-repeat; background-position: left 7px top 7px;}
 .areaDivulgacao{padding-left: 30px;}
 /* ----------------- Seção rodapé ------------------- */

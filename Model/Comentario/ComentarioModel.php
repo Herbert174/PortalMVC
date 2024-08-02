@@ -61,11 +61,10 @@
             if($Acao == 'Curtir')
                 {
                 return $comentario->AdicionarCurtidaComentario();
-                }
-            if($Acao == 'Descurtir')
-                {
-                return $comentario->RemoverCurtidaComentario();
-                }
+                }else if($Acao == 'Descurtir')
+                    {
+                    return $comentario->RemoverCurtidaComentario();
+                    }
             }
         }
 

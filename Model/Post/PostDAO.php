@@ -317,7 +317,7 @@
                 if($Resultado_Autor = mysqli_query($link, $sql))
                     {
                     $Autor = mysqli_fetch_array($Resultado_Autor);
-                    $_SESSION['qntd_curtidas_autor'] = $Autor['qntd_curtidas'];
+                    $_SESSION['qntd_curtidas_autor'] = $Autor['qntd_follows'];
                     return $Post;
                     }
                 }else

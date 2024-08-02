@@ -23,7 +23,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Pagina de Cadastro</title>
-        <link rel="icon" href="imagens/logo.png">
+        <link rel="icon" href="imagens/AgeOfGamesLogo.jpg">
 
         <!-- Bootstrap -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">

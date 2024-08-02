@@ -331,7 +331,7 @@
 
             if($ResultadoRegistro = mysqli_query($link, $sql))
                 {
-                $sql = " UPDATE usuarios SET qntd_curtidas = '$qntdCurtidas' WHERE id_usuario = '$IdAutor' ";
+                $sql = " UPDATE usuarios SET qntd_follows = '$qntdCurtidas' WHERE id_usuario = '$IdAutor' ";
                 if($AttQntdCurtidas = mysqli_query($link, $sql))
                     {
                     return true;
@@ -355,7 +355,7 @@
 
             if($Resultado = mysqli_query($link, $sql))
                 {
-                $sql = " UPDATE usuarios SET qntd_curtidas = '$qntdCurtidas' WHERE id_usuario = '$IdAutor' ";
+                $sql = " UPDATE usuarios SET qntd_follows = '$qntdCurtidas' WHERE id_usuario = '$IdAutor' ";
                 if($AttQntdCurtidas = mysqli_query($link, $sql))
                     {
                     return true;

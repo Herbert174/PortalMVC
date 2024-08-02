@@ -23,7 +23,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Pagina de Login</title>
-        <link rel="icon" href="imagens/logo.png">
+        <link rel="icon" href="imagens/AgeOfGamesLogo.jpg">
 
         <!-- Bootstrap -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -62,7 +62,7 @@
         <!-- Mobile navigation bar start -->
         <div class="mobile_nav">
             <div class="nav_bar">
-                <a href="pagina_usuario"><img src="imagens/perfil.jpg" class="mobile_profile_image" alt=""></a>
+                <a href="pagina_usuario"><img src="<?= $img_perfil ?>" class="mobile_profile_image" alt=""></a>
                 <i class="fa fa-bars nav_btn"></i>
                 <h4 class="nomeUsuarioColapse"><?= $usuario ?></h4>
             </div>

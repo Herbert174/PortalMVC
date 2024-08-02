@@ -44,7 +44,7 @@
                 $retorno_lista .= '<span class="">'.$comentario['hora_comentario'].'</span>';
                 $retorno_lista .= '</div>';
                 $retorno_lista .= '<div class="row">';
-                $retorno_lista .= '<p>'.$comentario['comentario'].'<a href="'.$acaoCurtidaComentario.'"><img class="img_curtida_comentario" src="'.$curtiuComentario.'"></a></p>';
+                $retorno_lista .= '<p>'.$comentario['comentario'].'<span class="span_direita"> &nbsp;'.$qntdCurtidadesComentario.' Curtidas</span><a href="'.$acaoCurtidaComentario.'"><img class="img_curtida_comentario" src="'.$curtiuComentario.'"></a></p>';
                 $retorno_lista .= '</div>';
                 $retorno_lista .= $acaocomentario;
                 $retorno_lista .= '</div>';
