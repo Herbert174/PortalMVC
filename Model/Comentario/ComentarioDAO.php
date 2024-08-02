@@ -8,8 +8,13 @@
             $usuario = $Comentario->retornaIdUsuario();
             $post = $Comentario->retornaIdPost();
 
-            $sql = " INSERT INTO comentarios(id_usuario, comentario, id_post) ";
-            $sql .= " values('$usuario', '$comentario', '$post') ";
+            $timezone = new DateTimeZone('America/Sao_Paulo');
+            $data_comentario = new DateTime('now', $timezone);
+            $data = $data_comentario->format('Y/m/d');
+            $hora = $data_comentario->format('H:i:s');
+
+            $sql = " INSERT INTO comentarios(id_usuario, comentario, id_post, data_comentario, hora_comentario) ";
+            $sql .= " values('$usuario', '$comentario', '$post', '$data', '$hora') ";
 
             $objDb = new database();
             $link = $objDb->conecta_mysql();

@@ -10,6 +10,8 @@
 	$img_post    = isset($_SESSION['img_post']) ? $_SESSION['img_post'] : NULL;
 	$titulo_post = isset($_SESSION['titulo_post']) ? $_SESSION['titulo_post'] : NULL;
 	$resumo_post = isset($_SESSION['resumo_post']) ? $_SESSION['resumo_post'] : NULL;
+    $qntd_curtidas = isset($_SESSION['qntd_curtidas_post']) ? $_SESSION['qntd_curtidas_post'] : NULL;
+    $qntd_follow = isset($_SESSION['qntd_curtidas_autor']) ? $_SESSION['qntd_curtidas_autor'] : NULL;
 
     $Usuario = new UsuarioController();
     $_SESSION['usuario'] = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
@@ -126,6 +128,7 @@
         <div class="mobile_nav">
             <div class="nav_bar">
                 <a href="pagina_usuario"><img src="<?= $img_perfil ?>" class="mobile_profile_image" alt=""></a>
+                <h4 class="nomeUsuarioColapse"><?= $usuario ?></h4>
                 <i class="fa fa-bars nav_btn"></i>
             </div>
             <div class="mobile_nav_items">
@@ -209,8 +212,10 @@
                                     <div class="col-md-12">
                                         <div class="col-md-12">
                                             <a href="<?= $acaoCurtidaPost ?>"><img class="img_curtida" src="<?= $curtiuPost ?>"></a>
+                                            <span class="negrito"><?= $qntd_curtidas ?> Curtidas</span>
                                             <p>Gostou desse post? deixe sua curtida!</p>
                                             <a href="<?= $acaoCurtidaAutor ?>"><img class="img_curtida" src="<?= $curtidaAutor ?>"></a>
+                                            <span class="negrito"><?= $qntd_follow ?> Follows</span>
                                             <p>Já segue o autor desse post?</p>
                                             <h4>Comentarios:</h4>
                                             <?= $comentarios ?>

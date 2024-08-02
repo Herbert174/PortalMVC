@@ -77,6 +77,7 @@
             <div class="nav_bar">
                 <a href="pagina_usuario"><img src="<?= $img_perfil ?>" class="mobile_profile_image" alt=""></a>
                 <i class="fa fa-bars nav_btn"></i>
+                <h4 class="nomeUsuarioColapse"><?= $usuario ?></h4>
             </div>
             <div class="mobile_nav_items">
                 <a href="index"><i class="fas fa-desktop"></i><span>Inicio</span></a>

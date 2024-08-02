@@ -324,18 +324,22 @@ label #sidebar_btn:hover{
 .direita{text-align: right;}
 .esquerda{text-align: left;}
 .branco{color: white;}
+.nomeUsuarioColapse{color: #ccc;}
 /* ----------------- Media Queries ------------------ */
 /* XS <768 */
 @media screen and (max-width: 767px)
 	{
-	.img_postagem{height: 410px;}
+	.img_postagem{height: 360px;}
 	.img_noticia{height: 410px;}
+	.nomeUsuarioColapse{color: white;}
+	.areaDivulgacao{padding-left: 15px;}
 	}
 
 @media screen and (min-width: 768px)
 	{
 	.img_postagem{height: 70px;}
 	.img_noticia{height: 140px;}
+	.areaDivulgacao{padding-left: 30px;}
 	}
 
 @media screen and (min-width: 992px)

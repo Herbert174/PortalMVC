@@ -83,9 +83,13 @@
             $titulo_post = $Post->retornaTituloPost();
             $resumo_post = $Post->retornaResumoPost();
             $categoria = $Post->retornaCategoriaPost();
+            
+            $timezone = new DateTimeZone('America/Sao_Paulo');
+            $data_post = new DateTime('now', $timezone);
+            $data = $data_post->format('Y/m/d');
 
-            $sql = " INSERT INTO post(id_usuario, post, img_post, titulo_post, resumo_post, categoria) ";
-            $sql .= " values('$usuario', '$post', '$img_post', '$titulo_post', '$resumo_post', '$categoria') ";
+            $sql = " INSERT INTO post(id_usuario, post, img_post, titulo_post, resumo_post, categoria, data_post) ";
+            $sql .= " values('$usuario', '$post', '$img_post', '$titulo_post', '$resumo_post', '$categoria', '$data') ";
 
             $objDb = new database();
             $link = $objDb->conecta_mysql();

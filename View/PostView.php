@@ -15,11 +15,13 @@
                 $retorno_lista .= '<a href="index?Controller=Post&Action=PegarPostController&post='.$post['id_post'].'"><img src="'.$post['img_post'].'" class="img_postagem"></a>';
                 $retorno_lista .= '</div>';
                 $retorno_lista .= '<div class="col-sm-9">';
+                $retorno_lista .= '<div class="col-sm-12">';
                 $retorno_lista .= '<div class="row">';
                 $retorno_lista .= '<span class="negrito">'.$post['titulo_post'].'</span>';
                 $retorno_lista .= '</div>';
                 $retorno_lista .= '<div class="row">';
                 $retorno_lista .= '<p>'.$post['resumo_post'].'</p>';
+                $retorno_lista .= '</div>';
                 $retorno_lista .= '</div>';
                 $retorno_lista .= '</div>';
                 $retorno_lista .= '</div>';
