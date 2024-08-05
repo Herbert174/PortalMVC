@@ -145,14 +145,16 @@
                             <a href="categoria?categoria=Curiosidades"><img src="imagens/imagem_noticia.jpg" class="img_postagem"></a>
                         </div>
                         <div class="col-sm-9">
-                            <div class="row">
-                                <span class="negrito">Curiosidades</span>
-                            </div>
-                            <div class="row">
-                                <p>Principais curiosidades que aconteceram pelo mundo? um novo costume bizarro?
-                                    uma informação possivelmente inutil mas que vale a pena conhecer? o que encontraremos
-                                    aqui, boa sorte pra descobrir
-                                </p>
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <span class="negrito">Curiosidades</span>
+                                </div>
+                                <div class="row">
+                                    <p>Principais curiosidades que aconteceram pelo mundo? um novo costume bizarro?
+                                        uma informação possivelmente inutil mas que vale a pena conhecer? o que encontraremos
+                                        aqui, boa sorte pra descobrir
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -162,13 +164,15 @@
                             <a href="categoria?categoria=Novidades"><img src="imagens/imagem_assuntos_gerais.jpg" class="img_postagem"></a>
                         </div>
                         <div class="col-sm-9">
-                            <div class="row">
-                                <span class="negrito">Novidades</span>
-                            </div>
-                            <div class="row">
-                                <p>Aquela novidade que estavamos esperando independente da área, esportes, jogos, cassino? (Alô policia federal),
-                                    se tem uma novidade este é o local ideal.
-                                </p>
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <span class="negrito">Novidades</span>
+                                </div>
+                                <div class="row">
+                                    <p>Aquela novidade que estavamos esperando independente da área, esportes, jogos, cassino? (Alô policia federal),
+                                        se tem uma novidade este é o local ideal.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -178,13 +182,15 @@
                             <a href="categoria?categoria=Jogos"><img src="imagens/imagem_jogo.jpg" class="img_postagem"></a>
                         </div>
                         <div class="col-sm-9">
-                            <div class="row">
-                                <span class="negrito">Jogos</span>
-                            </div>
-                            <div class="row">
-                                <p>Área favorita de muitos, bora conhecer mais sobre nossos jogos favoritos, de uma maneira
-                                    mais pratica, pra poder ir direto no ponto. Vamos jogar.
-                                </p>
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <span class="negrito">Jogos</span>
+                                </div>
+                                <div class="row">
+                                    <p>Área favorita de muitos, bora conhecer mais sobre nossos jogos favoritos, de uma maneira
+                                        mais pratica, pra poder ir direto no ponto. Vamos jogar.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -194,13 +200,15 @@
                             <a href="categoria?categoria=Programacao"><img src="imagens/imagem_programacao.jpg" class="img_postagem"></a>
                         </div>
                         <div class="col-sm-9">
-                            <div class="row">
-                                <span class="negrito">Programação</span>
-                            </div>
-                            <div class="row">
-                                <p>Sempre quis conhecer mais sobre programação? Como são feito sites, sistemas e os Jogos
-                                    que nos cercam no dia a dia, talvez você acabe aprendendo algo por aqui.
-                                </p>
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <span class="negrito">Programação</span>
+                                </div>
+                                <div class="row">
+                                    <p>Sempre quis conhecer mais sobre programação? Como são feito sites, sistemas e os Jogos
+                                        que nos cercam no dia a dia, talvez você acabe aprendendo algo por aqui.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -210,11 +218,13 @@
                             <a href="categoria?categoria=Animes"><img src="imagens/imagem_anime.jpg" class="img_postagem"></a>
                         </div>
                         <div class="col-sm-9">
-                            <div class="row">
-                                <span class="negrito">Animes</span>
-                            </div>
-                            <div class="row">
-                                <p>Quais os animes da temporada? não sei também, talvez a gente descubra aqui, talvez não.</p>
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <span class="negrito">Animes</span>
+                                </div>
+                                <div class="row">
+                                    <p>Quais os animes da temporada? não sei também, talvez a gente descubra aqui, talvez não.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -224,13 +234,15 @@
                             <a href="categoria?categoria=Desenho"><img src="imagens/imagem_desenho.jpg" class="img_postagem"></a>
                         </div>
                         <div class="col-sm-9">
-                            <div class="row">
-                                <span class="negrito">Desenhos</span>
-                            </div>
-                            <div class="row">
-                                <p>Você sabe desenhar e quer mostrar seus desenhos e técnicas,
-                                    ou só aprender com outros artistas? talvez essa área ajude.
-                                </p>
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <span class="negrito">Desenhos</span>
+                                </div>
+                                <div class="row">
+                                    <p>Você sabe desenhar e quer mostrar seus desenhos e técnicas,
+                                        ou só aprender com outros artistas? talvez essa área ajude.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -240,11 +252,13 @@
                             <a href="categoria?categoria=Series"><img src="imagens/imagem_serie.jpg" class="img_postagem"></a>
                         </div>
                         <div class="col-sm-9">
-                            <div class="row">
-                                <span class="negrito">Séries</span>
-                            </div>
-                            <div class="row">
-                                <p>Bora falar sobre as nossas séries favoritas e sobre como todos amamos o Michael?</p>
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <span class="negrito">Séries</span>
+                                </div>
+                                <div class="row">
+                                    <p>Bora falar sobre as nossas séries favoritas e sobre como todos amamos o Michael?</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -254,14 +268,16 @@
                             <a href="categoria?categoria=Filmes"><img src="imagens/imagem_filme.jpg" class="img_postagem"></a>
                         </div>
                         <div class="col-sm-9">
-                            <div class="row">
-                                <span class="negrito">Filmes</span>
-                            </div>
-                            <div class="row">
-                                <p>Aqueles filmes que marcaram época ou os novos que estão chamando atenção merecem um lugar
-                                    só pra eles, bora conhecer mais sobre nossos filmes incriveis e quem sabe conhecer novos
-                                    filmes pra salvar nosso fim de semana do tédio.
-                                </p>
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <span class="negrito">Filmes</span>
+                                </div>
+                                <div class="row">
+                                    <p>Aqueles filmes que marcaram época ou os novos que estão chamando atenção merecem um lugar
+                                        só pra eles, bora conhecer mais sobre nossos filmes incriveis e quem sabe conhecer novos
+                                        filmes pra salvar nosso fim de semana do tédio.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -271,14 +287,16 @@
                             <a href="categoria?categoria=Digimon"><img src="imagens/imagem_digimon.jpg" class="img_postagem"></a>
                         </div>
                         <div class="col-sm-9">
-                            <div class="row">
-                                <span class="negrito">Digimon</span>
-                            </div>
-                            <div class="row">
-                                <p>Aviso de área nostalgica, você já jogou algum jogo de Digimon na infância? se sim
-                                    talvez você acabe curtindo, conhecer mais sobre as franquias que marcaram nossa infância
-                                    pode enriquecer ainda mais a expêriencia que tinhamos quando mais novos.
-                                </p>
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <span class="negrito">Digimon</span>
+                                </div>
+                                <div class="row">
+                                    <p>Aviso de área nostalgica, você já jogou algum jogo de Digimon na infância? se sim
+                                        talvez você acabe curtindo, conhecer mais sobre as franquias que marcaram nossa infância
+                                        pode enriquecer ainda mais a expêriencia que tinhamos quando mais novos.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -288,14 +306,16 @@
                             <a href="categoria?categoria=Yugioh"><img src="imagens/imagem_yugioh.jpg" class="img_postagem"></a>
                         </div>
                         <div class="col-sm-9">
-                            <div class="row">
-                                <span class="negrito">Yugioh</span>
-                            </div>
-                            <div class="row">
-                                <p>Quem nunca ficou com raiva da tv aberta, que era fã de Yugioh, tinha varias cartinhas mas do
-                                    mais absoluto nada começaram a falar que era tudo diabolico, sem nem conhecerem nada sobre o 
-                                    anime. É, tempos sombrios kkkk
-                                </p>
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <span class="negrito">Yugioh</span>
+                                </div>
+                                <div class="row">
+                                    <p>Quem nunca ficou com raiva da tv aberta, que era fã de Yugioh, tinha varias cartinhas mas do
+                                        mais absoluto nada começaram a falar que era tudo diabolico, sem nem conhecerem nada sobre o 
+                                        anime. É, tempos sombrios kkkk
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -305,14 +325,16 @@
                             <a href="categoria?categoria=Ragnarok"><img src="imagens/imagem_ragnarok.png" class="img_postagem"></a>
                         </div>
                         <div class="col-sm-9">
-                            <div class="row">
-                                <span class="negrito">Ragnarok</span>
-                            </div>
-                            <div class="row">
-                                <p>O primeiro MMORPG de muitos, já foi considerado o melhor jogo do mundo no seu auge, mas
-                                    que mesmo com o passar dos anos ainda mantém uma base de players jogando, esse jogo 
-                                    com certeza marcou muita gente e merece seu lugar por aqui.
-                                </p>
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <span class="negrito">Ragnarok</span>
+                                </div>
+                                <div class="row">
+                                    <p>O primeiro MMORPG de muitos, já foi considerado o melhor jogo do mundo no seu auge, mas
+                                        que mesmo com o passar dos anos ainda mantém uma base de players jogando, esse jogo 
+                                        com certeza marcou muita gente e merece seu lugar por aqui.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -322,13 +344,15 @@
                             <a href="categoria?categoria=Discord"><img src="imagens/imagem_discord.jpg" class="img_postagem"></a>
                         </div>
                         <div class="col-sm-9">
-                            <div class="row">
-                                <span class="negrito">Discord</span>
-                            </div>
-                            <div class="row">
-                                <p>Bora falar sobre o discord? melhores bots possiveis? como configurar eles e criar o seu
-                                    servidor dos sonhos? essa área é pra isso bora.
-                                </p>
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <span class="negrito">Discord</span>
+                                </div>
+                                <div class="row">
+                                    <p>Bora falar sobre o discord? melhores bots possiveis? como configurar eles e criar o seu
+                                        servidor dos sonhos? essa área é pra isso bora.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
