@@ -153,6 +153,15 @@
                                         <option value="Jogos">Jogos</option>
                                         <option value="Novidades">Novidades</option>
                                         <option value="Curiosidades">Curiosidades</option>
+                                        <option value="Programacao">Programacao</option>
+                                        <option value="Discord">Discord</option>
+                                        <option value="Digimon">Digimon</option>
+                                        <option value="Yugioh">Yugioh</option>
+                                        <option value="Ragnarok">Ragnarok</option>
+                                        <option value="Desenho">Desenho</option>
+                                        <option value="Animes">Animes</option>
+                                        <option value="Series">Séries</option>
+                                        <option value="Filmes">Filmes</option>
                                     </select><br>
                                     <input type="submit" class="btn btn_envio" value="Enviar">
 

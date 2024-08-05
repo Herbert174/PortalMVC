@@ -12,6 +12,8 @@
 	$resumo_post = isset($_SESSION['resumo_post']) ? $_SESSION['resumo_post'] : NULL;
     $qntd_curtidas = isset($_SESSION['qntd_curtidas_post']) ? $_SESSION['qntd_curtidas_post'] : NULL;
     $qntd_follow = isset($_SESSION['qntd_curtidas_autor']) ? $_SESSION['qntd_curtidas_autor'] : NULL;
+    $img_autor = isset($_SESSION['img_autor']) ? $_SESSION['img_autor'] : 'imagens/AgeOfGamesLogo.jpg';
+    $nome_autor = isset($_SESSION['nome_autor']) ? $_SESSION['nome_autor'] : null;
 
     $Usuario = new UsuarioController();
     $_SESSION['usuario'] = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
@@ -214,6 +216,7 @@
                                             <a href="<?= $acaoCurtidaPost ?>"><img class="img_curtida" src="<?= $curtiuPost ?>"></a>
                                             <span class="negrito"><?= $qntd_curtidas ?> Curtidas</span>
                                             <p>Gostou desse post? deixe sua curtida!</p>
+                                            <img class="img_postagemAdm" src="<?=$img_autor?>"><span class="negrito"> <?=$nome_autor?></span><br><br>
                                             <a href="<?= $acaoCurtidaAutor ?>"><img class="img_curtida" src="<?= $curtidaAutor ?>"></a>
                                             <span class="negrito"><?= $qntd_follow ?> Follows</span>
                                             <p>Já segue o autor desse post?</p>

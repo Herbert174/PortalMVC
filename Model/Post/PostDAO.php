@@ -318,6 +318,8 @@
                     {
                     $Autor = mysqli_fetch_array($Resultado_Autor);
                     $_SESSION['qntd_curtidas_autor'] = $Autor['qntd_follows'];
+                    $_SESSION['img_autor'] = $Autor['img_perfil'];
+                    $_SESSION['nome_autor'] = $Autor['nome'];
                     return $Post;
                     }
                 }else
