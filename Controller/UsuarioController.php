@@ -94,7 +94,10 @@
                         {
                         header("Location: PainelControleGerenciamento");
                         }else header("Location: PainelGerenciamento".$Painel);
-                    } else header("Location: index");
+                    } else if($Model->DeslogaUsuarioModel())
+                                {
+                                header("Location: index");
+                                }else die ('Ocorreu um erro ao tentar deslogar da sua conta');
                 } else header("Location: index");
             }
 

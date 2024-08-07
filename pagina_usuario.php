@@ -94,7 +94,7 @@
                 <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Configure seu perfil</span></a>
                 <a href="categorias"><i class="fas fa-table"></i><span>Categorias</span></a>
                 <a href="novidades"><i class="fas fa-th"></i><span>Novidades</span></a>
-                <a href="#"><i class="fas fa-info-circle"></i><span>Deslogar</span></a>
+                <a href="index?Controller=Usuario&Action=DeslogaUsuarioController&Painel=Geral"><i class="fas fa-info-circle"></i><span>Deslogar</span></a>
                 <a href="PainelDigievolucao"><i class="fas fa-sliders-h"></i><span>Painel Digievolução</span></a>
             </div>
         </div>
@@ -110,7 +110,7 @@
             <a href="javascript:void(0)" id="perfil" data-toggle="modal" data-target="#modal-perfil"><i class="fas fa-cogs"></i><span>Configure seu perfil</span></a>
             <a href="categorias"><i class="fas fa-table"></i><span>Categorias</span></a>
             <a href="novidades"><i class="fas fa-th"></i><span>Novidades</span></a>
-            <a href="#"><i class="fas fa-info-circle"></i><span>Deslogar</span></a>
+            <a href="index?Controller=Usuario&Action=DeslogaUsuarioController&Painel=Geral"><i class="fas fa-info-circle"></i><span>Deslogar</span></a>
             <a href="PainelDigievolucao"><i class="fas fa-sliders-h"></i><span>Painel Digievolução</span></a>
         </div>
         <!-- Sidebar end -->

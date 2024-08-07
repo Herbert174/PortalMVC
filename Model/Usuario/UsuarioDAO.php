@@ -202,11 +202,11 @@
             // Por último, destrói a sessão
             session_destroy();
 
-            if($_SESSION['id_usuario'] != null)
+            if(isset($_SESSION['id_usuario']))
                 {
-                return true;
+                return false;
                 } else
-                    return false;
+                    return true;
             }
 
         public function VerificaAcesso(UsuarioVO $Usuario)
