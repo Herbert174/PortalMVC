@@ -100,6 +100,7 @@
                 $retorno_lista .= '<a href="index?Controller=Post&Action=PegarPostController&post='.$post['id_post'].'"><img src="'.$post['img_post'].'" class="img_postagem"></a>';
                 $retorno_lista .= '</div>';
                 $retorno_lista .= '<div class="col-sm-9">';
+                $retorno_lista .= '<div class="col-sm-12">';
                 $retorno_lista .= '<div class="row">';
                 $retorno_lista .= '<span class="negrito">'.$post['titulo_post'].'</span>';
                 $retorno_lista .= '</div>';
@@ -108,6 +109,7 @@
                 $retorno_lista .= '</div>';
                 $retorno_lista .= '<div class="row">';
                 $retorno_lista .= '<a class="link_direita" href="index?Controller=Post&Action=AtualizaStatusMeusPostController&id_post='.$post['id_post'].'&status='.$acao_post.'"><input type="button" class="btn btn_arquivar" value="'.$acao_retorno_post.'"></a>';
+                $retorno_lista .= '</div>';
                 $retorno_lista .= '</div>';
                 $retorno_lista .= '</div>';
                 $retorno_lista .= '</div>';

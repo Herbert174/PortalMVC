@@ -306,7 +306,7 @@ label #sidebar_btn:hover{
 .borda{border-style: solid;}
 .texto-capa{text-align: center; vertical-align: center;}
 .form_custom{margin-top: 5px;}
-.button_custom{margin-left: 87%; margin-top: 3px; margin-bottom: 5px;}
+.button_custom{float: right; margin-top: 3px; margin-bottom: 5px;}
 .select_custom{width: 400px;}
 .input_custom{width: 100%;}
 .modal_custom{background: #2f323a; color: white;}
@@ -334,6 +334,7 @@ label #sidebar_btn:hover{
 	.img_noticia{height: 410px;}
 	.nomeUsuarioColapse{color: white;}
 	.areaDivulgacao{padding-left: 15px;}
+	.btn_arquivar{margin-bottom: 5px;}
 	}
 
 @media screen and (min-width: 768px)
@@ -341,17 +342,20 @@ label #sidebar_btn:hover{
 	.img_postagem{height: 70px;}
 	.img_noticia{height: 140px;}
 	.areaDivulgacao{padding-left: 30px;}
+	.btn_arquivar{margin-bottom: 5px;}
 	}
 
 @media screen and (min-width: 992px)
 	{
 	.img_postagem{height: 80px;}
 	.img_noticia{height: 180px;}
+	.btn_arquivar{margin-bottom: 5px;}
 	}
 
 @media screen and (min-width: 1200px)
 	{
 	.img_postagem{height: 110px;}
 	.img_noticia{height: 230px;}
+	.btn_arquivar{margin-bottom: 0px;}
 	}
 /* Fim Media queries */
