@@ -78,11 +78,15 @@
         public function EnviarPost(PostVO $Post) //Envia post enviado pelo cliente para o banco de dados
             {
             $usuario = $Post->retornaUsuarioPost();
-            $post = $Post->retornaPost();
+            $postC = $Post->retornaPost();
             $img_post = $Post->retornaImgPost();
-            $titulo_post = $Post->retornaTituloPost();
-            $resumo_post = $Post->retornaResumoPost();
+            $titulo_postC = $Post->retornaTituloPost();
+            $resumo_postC = $Post->retornaResumoPost();
             $categoria = $Post->retornaCategoriaPost();
+
+            $post = str_replace("'", "", $postC);
+            $titulo_post = str_replace("'", "", $titulo_postC);
+            $resumo_post = str_replace("'", "", $resumo_postC);
             
             $timezone = new DateTimeZone('America/Sao_Paulo');
             $data_post = new DateTime('now', $timezone);

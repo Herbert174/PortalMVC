@@ -316,6 +316,7 @@ label #sidebar_btn:hover{
 .span_direita{float: right; margin-top: 5px;}
 .select_PainelDig{padding-left: 30px; background: url(Sprites/Birdramon.gif) no-repeat; background-position: left 7px top 7px;}
 .areaDivulgacao{padding-left: 30px;}
+.escondido{visibility: hidden;}
 /* ----------------- Seção rodapé ------------------- */
 
 

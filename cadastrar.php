@@ -128,7 +128,7 @@
                 <div class="col-sm-3"></div>
                 <div class="col-sm-3 areaDivulgacao">
                     <div class="row ">
-                        <a href="https://discord.gg/Yn3tHJAq" target="_blank"><img class="img_noticia custom" src="imagens/AgeOfGamesLogo.jpg"></a>
+                        <a href="https://discord.gg/nDKZ4fkET9" target="_blank"><img class="img_noticia custom" src="imagens/AgeOfGamesLogo.jpg"></a>
                     </div>
                     <div class="row custom"><br>
                         <ul>
@@ -136,6 +136,7 @@
                             <li>Deseja fazer parte de uma comunidade apaixonada por jogos e inovações?</li>
                             <li>Gosta dos principais classicos da nossa infância?</li>
                             <li>Se as respostas forem sim você veio ao lugar certo!</li>
+                            <li><a href="https://discord.gg/nDKZ4fkET9" target="_blank">https://discord.gg/nDKZ4fkET9</a></li>
                         </ul>
                     </div>
                 </div>

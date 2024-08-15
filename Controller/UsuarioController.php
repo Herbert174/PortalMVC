@@ -61,12 +61,15 @@
             { //Atualiza nome do usuario para nome enviado pelo cliente
             $Model = new UsuarioModel();
             $VO = new UsuarioVO();
-            $VO->defineIdUsuario($_SESSION['id_usuario']);
-            $VO->defineNomeUsuario($_POST['nome']);
-            if($RetornoAttUsuario = $Model->AtualizaUsuarioModel($VO))
+            if(isset($_SESSION['usuario']))
                 {
-                header("Location: index");
-                }
+                $VO->defineIdUsuario($_SESSION['id_usuario']);
+                $VO->defineNomeUsuario($_POST['nome']);
+                if($RetornoAttUsuario = $Model->AtualizaUsuarioModel($VO))
+                    {
+                    header("Location: index");
+                    }
+                }else header("Location: index");
             }
 
         public function VerificaLoginController()
