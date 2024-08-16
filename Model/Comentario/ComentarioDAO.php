@@ -171,8 +171,16 @@
             {
             $id_comentario = $Comentario->retornaIdComentario();
             $status_comentario = $Comentario->retornaStatusComentario();
+            $data = null;
 
-            $sql = " UPDATE comentarios SET status_comentario = '$status_comentario' WHERE id_comentario = '$id_comentario' ";
+            if($status_comentario == 'Suspenso')
+                {
+                $timezone = new DateTimeZone('America/Sao_Paulo');
+                $data_arquivado = new DateTime('now', $timezone);
+                $data = $data_arquivado->format('Y/m/d');
+                }else $data = null;
+
+            $sql = " UPDATE comentarios SET status_comentario = '$status_comentario', data_arquivado = '$data' WHERE id_comentario = '$id_comentario' ";
 
             $objDb = new database();
             $link = $objDb -> conecta_mysql();

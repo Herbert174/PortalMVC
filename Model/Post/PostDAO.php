@@ -389,8 +389,16 @@
             {
             $id_post = $Post->retornaIdPost();
             $status_post = $Post->retornaStatusPost();
+            $data = null;
 
-            $sql = " UPDATE post SET status_post = '$status_post' WHERE id_post = '$id_post' ";
+            if($status_post == 'Suspenso')
+                {
+                $timezone = new DateTimeZone('America/Sao_Paulo');
+                $data_arquivado = new DateTime('now', $timezone);
+                $data = $data_arquivado->format('Y/m/d');
+                }else $data = null;
+
+            $sql = " UPDATE post SET status_post = '$status_post', data_arquivado = '$data' WHERE id_post = '$id_post' ";
 
             $objDb = new database();
             $link = $objDb -> conecta_mysql();
