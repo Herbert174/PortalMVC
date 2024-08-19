@@ -30,7 +30,7 @@
 
                 if($comentario['id_usuario'] == $id_usuario)
                     {
-                    $acaocomentario = '<div class="row"> <a href="post?Controller=Comentario&Action=ApagarComentarioController&id_comentario='.$comentario['id_comentario'].'"><input type="button" class="btn btn_arquivar" value="Apagar comentario"></a> </div>';
+                    $acaocomentario = '<div class="row"> <a><input type="button" class="btn btn_arquivar btn_apagar" data-id_comentario="'.$comentario['id_comentario'].'" value="Apagar comentario"></a> </div>';
                     }
                 
                 $retorno_lista .= '<div class="row">';

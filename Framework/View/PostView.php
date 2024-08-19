@@ -34,7 +34,7 @@
             $retorno_lista = '';
             foreach($listaPosts as $post)
                 {
-                $acao_retorno_post = 'Suspender Post';
+                $acao_retorno_post = 'Apagar Post';
                 $acao_post = 'Suspenso';
                 if($post['img_perfil'] == null)
                     $post['img_perfil'] = 'imagens/AgeOfGamesLogo.jpg';
@@ -71,7 +71,7 @@
                 $retorno_lista .= '</div>';
                 $retorno_lista .= '<div class="col-sm-2">';
                 $retorno_lista .= '<div class="row">';
-                $retorno_lista .= '<a href="index?Controller=Post&Action=AtualizaStatusPostController&id_post='.$post['id_post'].'&status='.$acao_post.'"><input type="button" class="btn btn_arquivar" value="'.$acao_retorno_post.'"></a>';
+                $retorno_lista .= '<a><input type="button" class="btn btn_arquivar" value="'.$acao_retorno_post.'" onclick="confirme('.$post['id_post'].');"></a>';
                 $retorno_lista .= '</div>';
                 $retorno_lista .= '</div>';
                 $retorno_lista .= '</div><br>';
@@ -84,7 +84,7 @@
             $retorno_lista = '';
             foreach($listaPosts as $post)
                 {
-                $acao_retorno_post = 'Arquivar Post';
+                $acao_retorno_post = 'Apagar Post';
                 $acao_post = 'Suspenso';
                 if($post['img_post'] == null)
                     $post['img_post'] = 'imagens/postagem14.png';
@@ -108,11 +108,12 @@
                 $retorno_lista .= '<p>'.$post['resumo_post'].'</p>';
                 $retorno_lista .= '</div>';
                 $retorno_lista .= '<div class="row">';
-                $retorno_lista .= '<a class="link_direita" href="index?Controller=Post&Action=AtualizaStatusMeusPostController&id_post='.$post['id_post'].'&status='.$acao_post.'"><input type="button" class="btn btn_arquivar" value="'.$acao_retorno_post.'"></a>';
+                $retorno_lista .= '<a class="link_direita"><input type="button" class="btn btn_arquivar btn_apagar" data-id_post="'.$post['id_post'].'" value="'.$acao_retorno_post.'"></a>';
                 $retorno_lista .= '</div>';
                 $retorno_lista .= '</div>';
                 $retorno_lista .= '</div>';
                 $retorno_lista .= '</div>';
+                //$retorno_lista .= '<a class="link_direita" href="index?Controller=Post&Action=AtualizaStatusMeusPostController&id_post='.$post['id_post'].'&status='.$acao_post.'"><input type="button" class="btn btn_arquivar" value="'.$acao_retorno_post.'"></a>';
                 }
             return $retorno_lista;
             }

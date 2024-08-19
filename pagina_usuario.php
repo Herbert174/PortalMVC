@@ -2,7 +2,7 @@
 
     session_start();
 
-    include "Controller/PortalController.php";
+    include "Framework/Controller/PortalController.php";
 
     $Usuario = new UsuarioController();
     $_SESSION['usuario'] = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
@@ -53,10 +53,6 @@
                     $.ajax({
                           $('#modal-perfil').modal();
                           });
-                    })
-
-                $(function () {
-                    $('[data-toggle="tooltip"]').tooltip()
                     })
                 });
         </script>
@@ -292,9 +288,10 @@
                             <button class="btn btn-outline-secondary button_custom" data-toggle="tooltip" data-placement="left" title="Enviar Post" type="button">Enviar Post</button>
                         </div>
                     </div>
-                    <div id="meus_posts" <?= $CriadorPost ?>>
+                    <div <?= $CriadorPost ?>>
                         <h2 class="branco">Meus Posts</h2>
-                        <?php echo $Post->PegarMeusPostController(); ?>
+                        <div id="meus_posts" class="list-group"></div>
+                        <?php //echo $Post->PegarMeusPostController(); ?>
                         
                         <h2 class="branco">Posts Sugeridos</h2>
                     </div>
@@ -336,24 +333,43 @@
                 $('.nav_btn').click(function(){
                     $('.mobile_nav_items').toggleClass('active');
                     });
-                function postarpost()
+
+                function PegarMeusPosts()
                     {
                     //carrega os posts
                     $.ajax({
-                          url: 'postar_post.php',
+                          url: 'Req_PegarMeusPosts.php',
                           success: function(data)
                               {
-                              $('#portal').html(data);
+                              $('#meus_posts').html(data);
+                              
+                              $('.btn_apagar').click( function()
+						      	{
+						      	var id_post = $(this).data('id_post');
+
+                                if(confirm('Esta ação apagará o post em definitivo!'))
+                                    {
+                                    $.ajax({
+                                        url: 'Req_ApagarMeuPost.php',
+                                        method: 'get',
+                                        data: {post: id_post},
+                                        success: function(data)
+                                            {
+                                            PegarMeusPosts();
+                                            }
+                                        })
+                                    }
+                                });
                               }
-                          })
+                          });
                     }
-                postarpost();
+                PegarMeusPosts();
                 });
 
-                $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-        $('[data-toggle="popover"]').popover()
-        })
+            $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+            $('[data-toggle="popover"]').popover()
+            })
         </script>
 
     </body>

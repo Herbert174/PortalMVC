@@ -2,7 +2,7 @@
 
     session_start();
 
-    include_once "Controller/PortalController.php";
+    include_once "Framework/Controller/PortalController.php";
 
     $Usuario = new UsuarioController();
     $_SESSION['usuario'] = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : NULL;
@@ -218,6 +218,14 @@
                     $('.mobile_nav_items').toggleClass('active');
                     });
                 });
+
+            function confirme(id)
+                {
+                if(confirm('Esta ação apagará o post em questão!'))
+                    {
+                    window.location.href= "index?Controller=Post&Action=ApagarPostAdmController&post="+id+"";
+                    }
+                }
         </script>
 
     </body>

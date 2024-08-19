@@ -1,9 +1,9 @@
 <?php
 
-    include_once("Model/Usuario/UsuarioModel.php");
-    include_once("Model/Usuario/UsuarioDAO.php");
-    include_once("Model/Usuario/UsuarioVO.php");
-    include_once("View/UsuarioView.php");
+    include_once("Framework/Model/Usuario/UsuarioModel.php");
+    include_once("Framework/Model/Usuario/UsuarioDAO.php");
+    include_once("Framework/Model/Usuario/UsuarioVO.php");
+    include_once("Framework/View/UsuarioView.php");
 
     class UsuarioController
         {
@@ -127,11 +127,12 @@
             $Model = new UsuarioModel();
             $Acao = $_GET['acao'];
             $IdUsuario = isset($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : NULL;
+            $id_post = $_SESSION['id_post'];
             if($IdUsuario != null)
                 {
                 if($Model->AtualizaCurtidaPostModel($Acao))
                     {
-                    header("Location: post");
+                    header("Location: index?Controller=Post&Action=PegarPostController&post=$id_post");
                     }else die('Falha ao Atualizar curtida do post');
                 }else header("Location: post");
             }
@@ -141,11 +142,12 @@
             $Model = new UsuarioModel();
             $Acao = $_GET['acao'];
             $IdUsuario = isset($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : NULL;
+            $id_post = $_SESSION['id_post'];
             if($IdUsuario != null)
                 {
                 if($Model->AtualizaCurtidaAutorModel($Acao))
                     {
-                    header("Location: post");
+                    header("Location: index?Controller=Post&Action=PegarPostController&post=$id_post");
                     }else die('Falha ao Atualizar curtida do post');
                 }else header("Location: post");
             }

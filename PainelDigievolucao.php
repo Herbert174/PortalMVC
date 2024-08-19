@@ -2,7 +2,7 @@
 
     session_start();
 
-    include "Controller/PortalController.php";
+    include "Framework/Controller/PortalController.php";
 	$id_usuario  = isset($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : NULL;
 
     $Usuario = new UsuarioController();

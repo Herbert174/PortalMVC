@@ -19,7 +19,7 @@
                     {
                     if(filter_var($item_post, FILTER_VALIDATE_URL) !== false)
                         {
-                        $postando.='<img class="img-responsive img_postagem2" src='.$item_post.'><br><br>';
+                        $postando.='<img class="img-responsive img_postagem2" src='.$item_post.'><br>';
                         }else{
                             $postando.="<h2>$item_post</h2>";
                             }
@@ -28,7 +28,7 @@
                     {
                     if(filter_var($item_post, FILTER_VALIDATE_URL) !== false)
                         {
-                        $postando.='<img class="img-responsive img_postagem2" src='.$item_post.'><br><br>';
+                        $postando.='<img class="img-responsive img_postagem2" src='.$item_post.'><br>';
                         }else{
                             $postando.="<p>$item_post</p>";
                             }

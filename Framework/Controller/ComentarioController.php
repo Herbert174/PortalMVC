@@ -1,10 +1,10 @@
 <?php
 
     //Inclui demais recursos que integram o MVC do objeto Post
-    include_once("Model/Comentario/ComentarioModel.php");
-    include_once("Model/Comentario/ComentarioDAO.php");
-    include_once("Model/Comentario/ComentarioVO.php");
-    include_once("View/ComentarioView.php");
+    include_once("Framework/Model/Comentario/ComentarioModel.php");
+    include_once("Framework/Model/Comentario/ComentarioDAO.php");
+    include_once("Framework/Model/Comentario/ComentarioVO.php");
+    include_once("Framework/View/ComentarioView.php");
 
     class ComentarioController //Classe responsável por controlar Model e View
         {

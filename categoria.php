@@ -2,7 +2,7 @@
 
     session_start();
 
-    include "Controller/PortalController.php";
+    include "Framework/Controller/PortalController.php";
 
     $categoria = $_GET['categoria'];
 

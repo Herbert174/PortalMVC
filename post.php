@@ -2,7 +2,7 @@
 
     session_start();
 
-    include "Controller/PortalController.php";
+    include "Framework/Controller/PortalController.php";
 
     $id_post     = isset($_SESSION['id_post']) ? $_SESSION['id_post'] : NULL;
 	$id_usuario  = isset($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : NULL;
@@ -221,7 +221,8 @@
                                             <span class="negrito"><?= $qntd_follow ?> Follows</span>
                                             <p>Já segue o autor desse post?</p>
                                             <h4>Comentarios:</h4>
-                                            <?= $comentarios ?>
+                                            <div id="comentarios" class="list-group"></div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -230,9 +231,9 @@
                                         <div class="col-md-10">
                                             <h4>Enviar comentario</h4>
                                             <form method="post" action="post?Controller=Comentario&Action=EnviarComentarioController">
-                                                <input type="text" name="comentario" id="texto_comentario" class="form-control" placeholder="Deixe aqui seu comentario" maxlength="140" required>
+                                                <input type="text" name="comentario" id="input_comentario" class="form-control" placeholder="Deixe aqui seu comentario" maxlength="140" required>
                                                 <br>
-                                                <input type="submit" class="btn btn_envio" value="Enviar comentario">
+                                                <input type="button" class="btn btn_envio" id="btn_comentario" value="Enviar comentario">
                                             </form>
                                             <br><br>
                                         </div>
@@ -272,7 +273,55 @@
             $(document).ready(function(){
                 $('.nav_btn').click(function(){
                     $('.mobile_nav_items').toggleClass('active');
-                    })
+                    });
+
+                function PegarComentarios()
+                    {
+                    //carrega os posts
+                    $.ajax({
+                          url: 'Req_PegarComentarios.php',
+                          success: function(data)
+                              {
+                              $('#comentarios').html(data);
+                              
+                              $('.btn_apagar').click( function()
+						      	{
+						      	var id = $(this).data('id_comentario');
+
+                                if(confirm('Esta ação apagará o comentario em definitivo!'))
+                                    {
+                                    $.ajax({
+                                        url: 'Req_ApagarMeuComentario.php',
+                                        method: 'get',
+                                        data: {id_comentario: id},
+                                        success: function(data)
+                                            {
+                                            PegarComentarios();
+                                            }
+                                        })
+                                    }
+                                });
+                              }
+                          });
+                    }
+                PegarComentarios();
+
+                $('#btn_comentario').click( function()
+					{
+                    if($('#input_comentario').val().length > 0)
+						{
+						$.ajax({
+							  url: 'Req_EnviarComentario.php',
+							  method: 'post',
+							  data: {comentario: $('#input_comentario').val() },
+							  success: function(data)
+							   	{
+							   	$('#input_comentario').val('');
+                                PegarComentarios();
+							  	}
+							  });
+						}
+                    });
                 });
         </script>
 

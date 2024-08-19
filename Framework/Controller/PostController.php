@@ -1,10 +1,10 @@
 <?php
 
     //Inclui demais recursos que integram o MVC do objeto Post
-    include_once("Model/Post/PostModel.php");
-    include_once("Model/Post/PostDAO.php");
-    include_once("Model/Post/PostVO.php");
-    include_once("View/PostView.php");
+    include_once("Framework/Model/Post/PostModel.php");
+    include_once("Framework/Model/Post/PostDAO.php");
+    include_once("Framework/Model/Post/PostVO.php");
+    include_once("Framework/View/PostView.php");
 
     class PostController //Classe responsável por controlar Model e View
         {
@@ -136,6 +136,18 @@
             if($Model->ApagarPostModel($VO))
                 {
                 header("Location: pagina_usuario");
+                }else die('Falha ao apagar o post');
+            }
+
+        public function ApagarPostAdmController()
+            { //Segue sem uso atualmente
+            $Model = new PostModel();
+            $VO = new PostVO();
+            $post = $_GET['post'];
+            $VO->defineIdPost($post);
+            if($Model->ApagarPostModel($VO))
+                {
+                header("Location: PainelGerenciamentoPost");
                 }else die('Falha ao apagar o post');
             }
 
