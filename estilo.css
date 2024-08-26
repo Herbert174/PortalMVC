@@ -359,4 +359,18 @@ label #sidebar_btn:hover{
 	.img_noticia{height: 230px;}
 	.btn_arquivar{margin-bottom: 0px;}
 	}
+
+@media screen and (min-width: 1500px)
+	{
+	.img_postagem{height: 140px;}
+	.img_noticia{height: 290px;}
+	.btn_arquivar{margin-bottom: 0px;}
+	}
+
+@media screen and (min-width: 1800px)
+	{
+	.img_postagem{height: 170px;}
+	.img_noticia{height: 350px;}
+	.btn_arquivar{margin-bottom: 0px;}
+	}
 /* Fim Media queries */
